@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Il Cervo — Menu Training Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EFE1D4;
+  --navy: #163963;
+  --cognac: #6A3414;
+  --light-navy: #395670;
+  --white: #FDFAF6;
+  --off-white: #F7F0E8;
+  --border: #D4C4B0;
+  --text: #2D2A26;
+  --text-light: #5A554E;
+  --green: #2d7d3a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Draft banner */
+.draft-banner {
+  background: #c53030;
+  color: white;
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--light-navy) 100%);
+  color: var(--white);
+  padding: 20px 20px 16px;
+  text-align: center;
+}
+.header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 2px;
+}
+.header .sub {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+
+/* Tab bar */
+.tab-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.tab-btn {
+  flex: 1;
+  padding: 12px 8px;
+  border: none;
+  background: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+}
+.tab-btn.active {
+  color: var(--navy);
+}
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  background: var(--cognac);
+  border-radius: 2px 2px 0 0;
+}
+.tab-btn .tab-icon {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 0 100px;
+}
+.tab-content.active {
+  display: block;
+}
+
+/* ===== LEARN MODE ===== */
+.learn-controls {
+  padding: 14px 16px 6px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 6px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn.active {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+.learn-progress {
+  text-align: center;
+  padding: 10px 16px 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+}
+.progress-bar-track {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 6px 16px 0;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--cognac);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.flashcard-area {
+  padding: 16px;
+  perspective: 1000px;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.flashcard-container {
+  width: 100%;
+  max-width: 400px;
+  min-height: 320px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.flashcard-container.swiping-left {
+  transform: translateX(-30px) rotate(-2deg);
+  opacity: 0.8;
+}
+.flashcard-container.swiping-right {
+  transform: translateX(30px) rotate(2deg);
+  opacity: 0.8;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard-inner.flipped {
+  transform: rotateY(180deg);
+}
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  min-height: 320px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.flashcard-front {
+  background: var(--white);
+  border: 2px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px;
+  text-align: center;
+}
+.flashcard-back {
+  background: var(--navy);
+  color: var(--white);
+  transform: rotateY(180deg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  max-height: 480px;
+}
+.card-category-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.badge-showstoppers { background: #c53030; color: white; }
+.badge-signatures { background: var(--cognac); color: white; }
+.badge-starters { background: var(--green); color: white; }
+.card-dish-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.card-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--cognac);
+}
+.card-tap-hint {
+  margin-top: 20px;
+  font-size: 0.65rem;
+  color: var(--text-light);
+  opacity: 0.6;
+  font-weight: 500;
+}
+.back-label {
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  margin-bottom: -6px;
+}
+.back-say {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  font-style: italic;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  border-left: 3px solid var(--cognac);
+}
+.back-detail {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+.back-upsell {
+  font-size: 0.78rem;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  border-left: 3px solid var(--green);
+}
+.back-italian {
+  font-size: 0.72rem;
+  padding: 6px 10px;
+  background: rgba(106,52,20,0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.back-italian-flag { font-size: 0.9rem; flex-shrink: 0; }
+
+.card-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 16px 16px;
+}
+.nav-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--navy);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.nav-arrow:hover {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+.nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.nav-arrow:disabled:hover {
+  background: var(--white);
+  color: var(--navy);
+  border-color: var(--border);
+}
+.nav-dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+}
+.nav-dot.active {
+  background: var(--cognac);
+  transform: scale(1.3);
+}
+
+/* Cross-menu themes */
+.themes-section {
+  padding: 16px;
+}
+.themes-toggle {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+}
+.themes-toggle:hover { background: var(--off-white); }
+.themes-toggle .chevron {
+  transition: transform 0.3s;
+  font-size: 0.9rem;
+}
+.themes-toggle.open .chevron { transform: rotate(180deg); }
+.themes-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.themes-content.open {
+  max-height: 600px;
+}
+.theme-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.theme-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.theme-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.theme-item strong {
+  color: var(--navy);
+}
+
+/* ===== REFERENCE MODE ===== */
+.ref-search-wrap {
+  padding: 14px 16px 8px;
+  position: sticky;
+  top: 52px;
+  z-index: 50;
+  background: var(--bg);
+}
+.ref-search {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ref-search:focus { border-color: var(--navy); }
+.ref-search-wrap::before {
+  content: '\1F50D';
+  position: absolute;
+  left: 28px;
+  top: 24px;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+.ref-category {
+  padding: 10px 16px 4px;
+}
+.ref-category-label {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--navy);
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--cognac);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ref-cat-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.ref-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.ref-card:hover {
+  border-color: var(--light-navy);
+}
+.ref-card-header {
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.ref-card-header:active {
+  background: var(--off-white);
+}
+.ref-dish-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.ref-price {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--cognac);
+  white-space: nowrap;
+  margin-left: 12px;
+}
+.ref-expand-icon {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  transition: transform 0.3s;
+  margin-left: 8px;
+}
+.ref-card.expanded .ref-expand-icon {
+  transform: rotate(180deg);
+}
+.ref-card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.ref-card.expanded .ref-card-body {
+  max-height: 500px;
+}
+.ref-card-details {
+  padding: 0 14px 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 12px;
+}
+.ref-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.ref-detail-icon {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  margin-top: 1px;
+}
+.ref-say-text {
+  font-style: italic;
+  padding: 8px 12px;
+  background: var(--off-white);
+  border-radius: 8px;
+  border-left: 3px solid var(--cognac);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.ref-upsell {
+  padding: 6px 10px;
+  background: rgba(45,125,58,0.08);
+  border-radius: 8px;
+  border-left: 3px solid var(--green);
+  font-size: 0.75rem;
+}
+.ref-italian {
+  padding: 6px 10px;
+  background: rgba(106,52,20,0.06);
+  border-radius: 8px;
+  font-size: 0.72rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.ref-no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+
+/* ===== QUIZ MODE ===== */
+.quiz-header {
+  padding: 16px;
+  text-align: center;
+}
+.quiz-score-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 10px;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+}
+.quiz-score-item {
+  text-align: center;
+}
+.quiz-score-num {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.quiz-score-num.correct { color: var(--green); }
+.quiz-score-num.total { color: var(--navy); }
+.quiz-score-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+}
+.quiz-score-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--border);
+}
+.quiz-progress-text {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.quiz-card {
+  margin: 0 16px;
+  background: var(--white);
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.quiz-question-type {
+  padding: 10px 16px;
+  background: var(--off-white);
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+}
+.quiz-question {
+  padding: 20px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: var(--navy);
+}
+
+/* Multiple choice */
+.quiz-choices {
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.quiz-choice {
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  text-align: left;
+  color: var(--text);
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.quiz-choice:hover:not(:disabled) {
+  border-color: var(--navy);
+  background: var(--off-white);
+}
+.quiz-choice.correct {
+  border-color: var(--green);
+  background: rgba(45,125,58,0.08);
+  color: var(--green);
+  font-weight: 700;
+}
+.quiz-choice.wrong {
+  border-color: #c53030;
+  background: rgba(197,48,48,0.06);
+  color: #c53030;
+  opacity: 0.7;
+}
+.quiz-choice:disabled {
+  cursor: default;
+}
+
+/* Reveal answer */
+.quiz-reveal-btn {
+  display: block;
+  margin: 0 16px 16px;
+  width: calc(100% - 32px);
+  padding: 14px;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  background: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quiz-reveal-btn:hover {
+  border-color: var(--navy);
+  background: var(--off-white);
+}
+.quiz-answer {
+  display: none;
+  margin: 0 16px 16px;
+  padding: 14px;
+  background: var(--off-white);
+  border-radius: 12px;
+  border-left: 4px solid var(--cognac);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.quiz-answer.visible {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Self-rate buttons for reveal questions */
+.quiz-self-rate {
+  display: none;
+  padding: 0 16px 16px;
+  gap: 8px;
+}
+.quiz-self-rate.visible {
+  display: flex;
+}
+.rate-btn {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.rate-btn.knew-it {
+  color: var(--green);
+}
+.rate-btn.knew-it:hover {
+  border-color: var(--green);
+  background: rgba(45,125,58,0.06);
+}
+.rate-btn.missed-it {
+  color: #c53030;
+}
+.rate-btn.missed-it:hover {
+  border-color: #c53030;
+  background: rgba(197,48,48,0.06);
+}
+
+.quiz-next-btn {
+  display: none;
+  margin: 16px;
+  width: calc(100% - 32px);
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quiz-next-btn:hover { background: var(--light-navy); }
+.quiz-next-btn.visible { display: block; }
+
+.quiz-complete {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+.quiz-complete.visible { display: block; }
+.quiz-complete-emoji {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+.quiz-complete-msg {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.quiz-complete-detail {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+.quiz-restart-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 12px;
+  background: var(--cognac);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quiz-restart-btn:hover { opacity: 0.9; }
+
+/* Utility */
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- Draft banner -->
+<div class="draft-banner">DRAFT — Internal Training Tool — Not for Guest Distribution</div>
+
+<!-- Header -->
+<div class="header">
+  <h1>Menu Training Guide</h1>
+  <div class="sub">Il Cervo Brunch</div>
+</div>
+
+<!-- Tab bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="learn">
+    <span class="tab-icon">&#x1F4DA;</span>
+    Learn
+  </button>
+  <button class="tab-btn" data-tab="reference">
+    <span class="tab-icon">&#x1F50D;</span>
+    Reference
+  </button>
+  <button class="tab-btn" data-tab="quiz">
+    <span class="tab-icon">&#x1F3AF;</span>
+    Quiz
+  </button>
+</div>
+
+<!-- ===== LEARN MODE ===== -->
+<div class="tab-content active" id="tab-learn">
+  <div class="learn-controls" id="learn-filters"></div>
+  <div class="learn-progress" id="learn-progress"></div>
+  <div class="progress-bar-track"><div class="progress-bar-fill" id="learn-progress-bar"></div></div>
+  <div class="flashcard-area" id="flashcard-area">
+    <div class="flashcard-container" id="flashcard-container">
+      <div class="flashcard-inner" id="flashcard-inner">
+        <div class="flashcard-front" id="flashcard-front"></div>
+        <div class="flashcard-back" id="flashcard-back"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-nav" id="card-nav"></div>
+  <div class="themes-section">
+    <button class="themes-toggle" id="themes-toggle" onclick="toggleThemes()">
+      Key Themes Across the Menu
+      <span class="chevron">&#x25BC;</span>
+    </button>
+    <div class="themes-content" id="themes-content">
+      <div class="theme-card">
+        <div class="theme-item">
+          <span class="theme-icon">&#x1F35E;</span>
+          <div><strong>Focaccia is everywhere.</strong> Burger bun, meatball sub, bruschetta, omelet side. "All our bread is house-made focaccia."</div>
+        </div>
+        <div class="theme-item">
+          <span class="theme-icon">&#x1F969;</span>
+          <div><strong>Dry aging is our signature.</strong> Two items use it (burger + meatball). "Chef Mike dry ages the beef in-house."</div>
+        </div>
+        <div class="theme-item">
+          <span class="theme-icon">&#x1F1EE;&#x1F1F9;</span>
+          <div><strong>Italian DNA in every dish.</strong> Even the "American" items have Italian touches — giardiniera, Calabrian chili, ricotta, focaccia.</div>
+        </div>
+        <div class="theme-item">
+          <span class="theme-icon">&#x1F468;&#x200D;&#x1F373;</span>
+          <div><strong>Chef Mike's story matters.</strong> Food &amp; Wine Best New Chef 2010. Blackbird, Jean-Georges, WD-50. This changes how guests experience the meal.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== REFERENCE MODE ===== -->
+<div class="tab-content" id="tab-reference">
+  <div class="ref-search-wrap">
+    <input type="text" class="ref-search" id="ref-search" placeholder="Search dishes, ingredients, talking points..." autocomplete="off">
+  </div>
+  <div id="ref-list"></div>
+  <div class="ref-no-results hidden" id="ref-no-results">No dishes match your search.</div>
+</div>
+
+<!-- ===== QUIZ MODE ===== -->
+<div class="tab-content" id="tab-quiz">
+  <div class="quiz-header">
+    <div class="quiz-score-bar">
+      <div class="quiz-score-item">
+        <div class="quiz-score-num correct" id="quiz-correct">0</div>
+        <div class="quiz-score-label">Correct</div>
+      </div>
+      <div class="quiz-score-divider"></div>
+      <div class="quiz-score-item">
+        <div class="quiz-score-num total" id="quiz-total">0</div>
+        <div class="quiz-score-label">of 10</div>
+      </div>
+    </div>
+    <div class="quiz-progress-text" id="quiz-progress-text">Question 1 of 10</div>
+  </div>
+  <div id="quiz-area"></div>
+  <div class="quiz-complete" id="quiz-complete">
+    <div class="quiz-complete-emoji" id="quiz-complete-emoji"></div>
+    <div class="quiz-complete-msg" id="quiz-complete-msg"></div>
+    <div class="quiz-complete-detail" id="quiz-complete-detail"></div>
+    <button class="quiz-restart-btn" onclick="startQuiz()">Shuffle &amp; Try Again</button>
+  </div>
+</div>
+
+<script>
+// =============================================
+// MENU DATA — Update this array when the menu changes. Everything below renders from this data.
+// =============================================
+const MENU = [
+  {
+    name: "24 Carat Gold French Toast",
+    price: "$22",
+    category: "Showstoppers",
+    ingredients: "Banana rum toffee, gold-dusted chopped candied cashews, torched meringue",
+    say: "Gold-dusted, torched meringue, banana rum toffee. It's the most photographed dish on the menu.",
+    italian: null,
+    upsell: "THIS IS THE #1 INSTAGRAM ITEM. Every table should hear about it.",
+    addons: null
+  },
+  {
+    name: "Black Truffle Omelet",
+    price: "$22",
+    category: "Showstoppers",
+    ingredients: "Whipped herbed ricotta, focaccia, radicchio & escarole salad",
+    say: "Black truffle omelet with whipped ricotta. And if you really want to go for it, add the caviar — nobody else in Milwaukee does caviar at brunch.",
+    italian: "Ricotta, focaccia, radicchio — full Italian",
+    upsell: "Caviar add-on ($25) — the luxury anchor for special occasions",
+    addons: "Add caviar $25"
+  },
+  {
+    name: "Bacon, Egg & Cheese Pizza",
+    price: "$26",
+    category: "Showstoppers",
+    ingredients: "Ricotta, scrambled egg, crispy bacon, scallion",
+    say: "Breakfast pizza — ricotta, egg, bacon. Great for sharing. Add truffle if you want to go crazy.",
+    italian: "Pizza with ricotta — obviously Italian",
+    upsell: "Truffle add-on ($25), and it's great for groups/sharing (drives check avg)",
+    addons: "Add truffle $25"
+  },
+  {
+    name: "Il Cervo's Dry Aged Burger",
+    price: "$24",
+    category: "Signatures",
+    ingredients: "White American, giardiniera aioli, grilled onions, crispy bacon, focaccia bun, fries",
+    say: "The burger is dry aged — Chef Mike ages the beef in-house. The giardiniera aioli is our Italian twist.",
+    italian: "Giardiniera aioli, focaccia bun",
+    upsell: "Add egg $2. Mention dry aging — it's a talking point.",
+    addons: "Add egg $2"
+  },
+  {
+    name: "Dry Aged Meatball Sub",
+    price: "$24",
+    category: "Signatures",
+    ingredients: "Dry aged beef meatball, marinara, giardiniera, provolone, focaccia bun, fries",
+    say: "House-made meatballs from dry aged beef on fresh focaccia. It's the most Italian thing on the menu.",
+    italian: "Marinara, giardiniera, provolone, focaccia — the most Italian item",
+    upsell: "Pair with a salad for a lighter combo",
+    addons: null
+  },
+  {
+    name: "Salmon Gravlax Bruschetta",
+    price: "$15",
+    category: "Signatures",
+    ingredients: "Calabrian aioli, pickled onions, cherry tomatoes, avocado, toasted focaccia",
+    say: "Elevated smoked salmon toast — house-cured gravlax with a spicy Calabrian kick. Great starter.",
+    italian: "Calabrian aioli, focaccia, bruschetta format",
+    upsell: "Good appetizer/starter before a main",
+    addons: null
+  },
+  {
+    name: "Steak and Eggs",
+    price: "$28",
+    category: "Signatures",
+    ingredients: "Grilled hanger steak, crispy hash browns, two fried eggs, hollandaise",
+    say: "Hanger steak is a butcher's cut — super tender, tons of flavor. With crispy hash browns and hollandaise, it's the power brunch move.",
+    italian: "Lighter touch here — hanger steak is chef-driven, not specifically Italian",
+    upsell: "The premium anchor — highest-priced entree",
+    addons: null
+  },
+  {
+    name: "Caesar Salad",
+    price: "$14",
+    category: "Starters",
+    ingredients: "Baby romaine, preserved garlic dressing",
+    say: "Our Caesar uses preserved garlic — gives it this amazing umami depth that's completely different from a regular Caesar.",
+    italian: "Caesar salad has Italian-American roots; preserved garlic elevates it",
+    upsell: "Great to share as a table starter",
+    addons: null
+  },
+  {
+    name: "Slow Roasted Baby Beet Salad",
+    price: "$19",
+    category: "Starters",
+    ingredients: "Red watercress, beauty heart radish, pistachios, sherry maple vinaigrette",
+    say: "Beautiful spring salad — the beauty heart radishes are those gorgeous pink ones. Light, bright, great to share.",
+    italian: "Lighter touch — seasonal, ingredient-forward (Italian philosophy)",
+    upsell: "Suggest alongside a heavier entree for balance",
+    addons: null
+  }
+];
+
+// =============================================
+// Categories config
+// =============================================
+const CATEGORIES = [
+  { key: "Showstoppers", label: "Showstoppers", badgeClass: "badge-showstoppers", directive: "Push these" },
+  { key: "Signatures", label: "Signatures", badgeClass: "badge-signatures", directive: "Tell the story" },
+  { key: "Starters", label: "Starters", badgeClass: "badge-starters", directive: "" }
+];
+
+function getCategoryConfig(cat) {
+  return CATEGORIES.find(c => c.key === cat) || CATEGORIES[0];
+}
+
+// =============================================
+// TAB SWITCHING
+// =============================================
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// =============================================
+// LEARN MODE
+// =============================================
+let learnFilter = 'All';
+let learnIndex = 0;
+let isFlipped = false;
+
+function getFilteredMenu() {
+  if (learnFilter === 'All') return [...MENU];
+  return MENU.filter(d => d.category === learnFilter);
+}
+
+function initLearn() {
+  // Build filter buttons
+  const filtersEl = document.getElementById('learn-filters');
+  const cats = ['All', ...CATEGORIES.map(c => c.key)];
+  filtersEl.innerHTML = cats.map(c =>
+    `<button class="filter-btn ${c === learnFilter ? 'active' : ''}" onclick="setLearnFilter('${c}')">${c}</button>`
+  ).join('');
+  learnIndex = 0;
+  isFlipped = false;
+  renderCard();
+}
+
+function setLearnFilter(cat) {
+  learnFilter = cat;
+  learnIndex = 0;
+  isFlipped = false;
+  document.querySelectorAll('#learn-filters .filter-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent === cat);
+  });
+  renderCard();
+}
+
+function renderCard() {
+  const items = getFilteredMenu();
+  if (items.length === 0) return;
+  const dish = items[learnIndex];
+  const catConf = getCategoryConfig(dish.category);
+  const inner = document.getElementById('flashcard-inner');
+  inner.classList.remove('flipped');
+  isFlipped = false;
+
+  // Progress
+  document.getElementById('learn-progress').textContent = `${learnIndex + 1} of ${items.length}`;
+  document.getElementById('learn-progress-bar').style.width = `${((learnIndex + 1) / items.length) * 100}%`;
+
+  // Front
+  let priceDisplay = dish.price;
+  if (dish.addons) priceDisplay += ` <span style="font-size:0.7rem;font-weight:500;color:var(--text-light);display:block;margin-top:4px;">${dish.addons}</span>`;
+
+  document.getElementById('flashcard-front').innerHTML = `
+    <span class="card-category-badge ${catConf.badgeClass}">${catConf.label}</span>
+    <div class="card-dish-name">${dish.name}</div>
+    <div class="card-price">${priceDisplay}</div>
+    <div class="card-tap-hint">Tap to flip</div>
+  `;
+
+  // Back
+  let backHTML = `
+    <span class="back-label">What to Say</span>
+    <div class="back-say">"${dish.say}"</div>
+    <span class="back-label">Ingredients</span>
+    <div class="back-detail">${dish.ingredients}</div>
+  `;
+  if (dish.italian) {
+    backHTML += `<div class="back-italian"><span class="back-italian-flag">&#x1F1EE;&#x1F1F9;</span> ${dish.italian}</div>`;
+  }
+  if (dish.upsell) {
+    backHTML += `<span class="back-label">Upsell Tip</span><div class="back-upsell">${dish.upsell}</div>`;
+  }
+  document.getElementById('flashcard-back').innerHTML = backHTML;
+
+  // Nav
+  const navEl = document.getElementById('card-nav');
+  let dotsHTML = items.map((_, i) =>
+    `<div class="nav-dot ${i === learnIndex ? 'active' : ''}"></div>`
+  ).join('');
+  navEl.innerHTML = `
+    <button class="nav-arrow" onclick="learnPrev()" ${learnIndex === 0 ? 'disabled' : ''}>&#x25C0;</button>
+    <div class="nav-dots">${dotsHTML}</div>
+    <button class="nav-arrow" onclick="learnNext()" ${learnIndex === items.length - 1 ? 'disabled' : ''}>&#x25B6;</button>
+  `;
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('flashcard-inner').classList.toggle('flipped', isFlipped);
+}
+
+function learnPrev() {
+  const items = getFilteredMenu();
+  if (learnIndex > 0) {
+    learnIndex--;
+    renderCard();
+  }
+}
+
+function learnNext() {
+  const items = getFilteredMenu();
+  if (learnIndex < items.length - 1) {
+    learnIndex++;
+    renderCard();
+  }
+}
+
+// Click to flip
+document.getElementById('flashcard-container').addEventListener('click', flipCard);
+
+// Swipe support
+let touchStartX = 0;
+let touchStartY = 0;
+let swiping = false;
+
+const flashcardArea = document.getElementById('flashcard-area');
+const flashcardContainer = document.getElementById('flashcard-container');
+
+flashcardArea.addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  swiping = false;
+}, { passive: true });
+
+flashcardArea.addEventListener('touchmove', (e) => {
+  const dx = e.touches[0].clientX - touchStartX;
+  const dy = e.touches[0].clientY - touchStartY;
+  if (Math.abs(dx) > 20 && Math.abs(dx) > Math.abs(dy)) {
+    swiping = true;
+    flashcardContainer.classList.toggle('swiping-left', dx < -20);
+    flashcardContainer.classList.toggle('swiping-right', dx > 20);
+  }
+}, { passive: true });
+
+flashcardArea.addEventListener('touchend', (e) => {
+  flashcardContainer.classList.remove('swiping-left', 'swiping-right');
+  if (!swiping) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (dx < -50) learnNext();
+  else if (dx > 50) learnPrev();
+  // Prevent the flip from firing after a swipe
+  swiping = false;
+}, { passive: true });
+
+// Override click handler to not flip on swipe
+document.getElementById('flashcard-container').removeEventListener('click', flipCard);
+document.getElementById('flashcard-container').addEventListener('click', (e) => {
+  if (!swiping) flipCard();
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  const learnTab = document.getElementById('tab-learn');
+  if (!learnTab.classList.contains('active')) return;
+  if (e.key === 'ArrowLeft') learnPrev();
+  else if (e.key === 'ArrowRight') learnNext();
+  else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
+});
+
+function toggleThemes() {
+  document.getElementById('themes-toggle').classList.toggle('open');
+  document.getElementById('themes-content').classList.toggle('open');
+}
+
+// =============================================
+// REFERENCE MODE
+// =============================================
+function initReference() {
+  const container = document.getElementById('ref-list');
+  let html = '';
+  CATEGORIES.forEach(cat => {
+    const items = MENU.filter(d => d.category === cat.key);
+    html += `<div class="ref-category" data-cat="${cat.key}">`;
+    html += `<div class="ref-category-label">${cat.label} <span class="ref-cat-badge ${cat.badgeClass}">${cat.directive}</span></div>`;
+    items.forEach((dish, i) => {
+      const id = `ref-${cat.key}-${i}`;
+      let priceStr = dish.price;
+      if (dish.addons) priceStr += ` <span style="font-size:0.65rem;font-weight:500;color:var(--text-light);">(${dish.addons})</span>`;
+      let detailsHTML = `<div class="ref-say-text">"${dish.say}"</div>`;
+      detailsHTML += `<div class="ref-detail-row"><span class="ref-detail-icon">&#x1F372;</span> <div>${dish.ingredients}</div></div>`;
+      if (dish.italian) {
+        detailsHTML += `<div class="ref-italian"><span style="flex-shrink:0;">&#x1F1EE;&#x1F1F9;</span> ${dish.italian}</div>`;
+      }
+      if (dish.upsell) {
+        detailsHTML += `<div class="ref-upsell">${dish.upsell}</div>`;
+      }
+      html += `
+        <div class="ref-card" id="${id}" data-search="${(dish.name + ' ' + dish.ingredients + ' ' + dish.say + ' ' + (dish.italian || '') + ' ' + (dish.upsell || '')).toLowerCase()}">
+          <div class="ref-card-header" onclick="toggleRef('${id}')">
+            <span class="ref-dish-name">${dish.name}</span>
+            <span style="display:flex;align-items:center;"><span class="ref-price">${priceStr}</span><span class="ref-expand-icon">&#x25BC;</span></span>
+          </div>
+          <div class="ref-card-body"><div class="ref-card-details">${detailsHTML}</div></div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function toggleRef(id) {
+  document.getElementById(id).classList.toggle('expanded');
+}
+
+// Search
+document.getElementById('ref-search').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.ref-card');
+  let anyVisible = false;
+  cards.forEach(card => {
+    const match = !q || card.dataset.search.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) anyVisible = true;
+  });
+  // Hide empty categories
+  document.querySelectorAll('.ref-category').forEach(cat => {
+    const visibleCards = cat.querySelectorAll('.ref-card:not([style*="display: none"])');
+    cat.style.display = visibleCards.length > 0 ? '' : 'none';
+  });
+  document.getElementById('ref-no-results').classList.toggle('hidden', anyVisible);
+});
+
+// =============================================
+// QUIZ MODE
+// =============================================
+let quizQuestions = [];
+let quizIndex = 0;
+let quizCorrect = 0;
+let quizAnswered = 0;
+const QUIZ_COUNT = 10;
+
+function buildQuizPool() {
+  const pool = [];
+
+  // Type 1: "What do you recommend?" — multiple choice, answer is a showstopper
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Table Scenario',
+    question: 'A guest says "What\'s the thing everyone talks about here?" — which dish do you push?',
+    choices: ['Caesar Salad', '24 Carat Gold French Toast', 'Steak and Eggs', 'Dry Aged Meatball Sub'],
+    correct: 1,
+    explain: 'The Gold French Toast is the #1 Instagram item. Every table should hear about it.'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Table Scenario',
+    question: 'A guest asks "What\'s the Italian brunch thing you recommend?" — which dish do you push?',
+    choices: ['24 Carat Gold French Toast', 'Steak and Eggs', 'Black Truffle Omelet', 'Caesar Salad'],
+    correct: 2,
+    explain: 'The Black Truffle Omelet is ricotta, focaccia, radicchio — full Italian. Plus the caviar upsell.'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Table Scenario',
+    question: 'A table of 4 wants something to share. What do you suggest first?',
+    choices: ['Steak and Eggs', 'Bacon, Egg & Cheese Pizza', 'Caesar Salad', 'Slow Roasted Baby Beet Salad'],
+    correct: 1,
+    explain: 'The breakfast pizza is great for sharing and drives check average, especially with the truffle add-on.'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Upsell Check',
+    question: 'A guest orders the Black Truffle Omelet. What\'s the upsell move?',
+    choices: ['Add egg for $2', 'Suggest a side salad', 'Add caviar for $25', 'Recommend the truffle add-on'],
+    correct: 2,
+    explain: 'Caviar add-on ($25) — the luxury anchor. "Nobody else in Milwaukee does caviar at brunch."'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Upsell Check',
+    question: 'What\'s the upsell on the Bacon, Egg & Cheese Pizza?',
+    choices: ['Add caviar $25', 'Add truffle $25', 'Add egg $2', 'Pair with a salad'],
+    correct: 1,
+    explain: 'Truffle add-on ($25). It\'s also great for sharing, which drives check average.'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Menu Knowledge',
+    question: 'Which two dishes use dry aged beef?',
+    choices: ['Burger + Steak and Eggs', 'Burger + Meatball Sub', 'Meatball Sub + Steak and Eggs', 'Burger + Bruschetta'],
+    correct: 1,
+    explain: 'Il Cervo\'s Dry Aged Burger and the Dry Aged Meatball Sub. Chef Mike ages the beef in-house.'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Menu Knowledge',
+    question: 'What bread is used across multiple dishes?',
+    choices: ['Sourdough', 'Brioche', 'Focaccia', 'Ciabatta'],
+    correct: 2,
+    explain: 'Focaccia is in the burger bun, meatball sub, bruschetta, and omelet side. All house-made.'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Table Scenario',
+    question: 'A guest says "I want something light to start." Best suggestion?',
+    choices: ['Dry Aged Meatball Sub', 'Salmon Gravlax Bruschetta', 'Steak and Eggs', 'Bacon, Egg & Cheese Pizza'],
+    correct: 1,
+    explain: 'Salmon Gravlax Bruschetta — great starter before a main. Elevated smoked salmon toast with Calabrian kick.'
+  });
+
+  // Type 2: Reveal-answer questions
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Knowledge Check',
+    question: 'What makes the burger different from any other burger?',
+    answer: 'It\'s made with dry aged beef — Chef Mike ages the beef in-house. The giardiniera aioli is the Italian twist, and it\'s served on a house-made focaccia bun.'
+  });
+
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Knowledge Check',
+    question: 'What\'s in the Salmon Gravlax Bruschetta?',
+    answer: 'House-cured gravlax, Calabrian aioli (spicy!), pickled onions, cherry tomatoes, avocado, on toasted focaccia.'
+  });
+
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Knowledge Check',
+    question: 'What does "dry aged" mean and which dishes use it?',
+    answer: 'Dry aging concentrates flavor by letting beef age in a controlled environment — the moisture evaporates, intensifying the beefy taste. Chef Mike does this in-house. Two dishes: the Burger and the Meatball Sub.'
+  });
+
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Knowledge Check',
+    question: 'What\'s the story on the Caesar Salad? Why is ours different?',
+    answer: 'Our Caesar uses preserved garlic dressing — gives it umami depth that\'s completely different from a regular Caesar. Caesar salad also has Italian-American roots, which ties to the restaurant\'s identity.'
+  });
+
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Talking Points',
+    question: 'A guest asks "What\'s the deal with this place — is it Italian?" How do you answer?',
+    answer: 'Italian-inspired brunch. Every dish has Italian DNA — focaccia in the bread, giardiniera and Calabrian chili in the sauces, ricotta and provolone in the cheese. Chef Mike trained at Blackbird, Jean-Georges, and WD-50 — he was Food & Wine Best New Chef 2010.'
+  });
+
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Talking Points',
+    question: 'A guest says they want something to share. What do you suggest?',
+    answer: 'Bacon, Egg & Cheese Pizza ($26, add truffle $25) — it\'s designed for sharing. The Caesar Salad ($14) is also great as a table starter. For a lighter share, the Salmon Gravlax Bruschetta ($15).'
+  });
+
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Chef Story',
+    question: 'Who is Chef Mike and why should a guest care?',
+    answer: 'Food & Wine Best New Chef 2010. Trained at Blackbird (Chicago), Jean-Georges (NYC), and WD-50 (NYC). This pedigree explains why a "brunch spot" has dry aged beef, house-cured gravlax, and gold-dusted French toast. It changes how guests experience the meal.'
+  });
+
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Price Knowledge',
+    question: 'What\'s the most expensive entree and the least expensive item?',
+    answer: 'Most expensive: Steak and Eggs at $28 (the power brunch move). Least expensive: Caesar Salad at $14. The Salmon Gravlax Bruschetta at $15 is the cheapest non-salad item.'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Table Scenario',
+    question: 'A guest on a special occasion asks for "the most indulgent thing on the menu." What do you suggest?',
+    choices: ['Caesar Salad', 'Dry Aged Burger', 'Black Truffle Omelet with Caviar', 'Slow Roasted Baby Beet Salad'],
+    correct: 2,
+    explain: 'Black Truffle Omelet with the caviar add-on — $47 total. "Nobody else in Milwaukee does caviar at brunch." The luxury anchor for special occasions.'
+  });
+
+  pool.push({
+    type: 'reveal',
+    typeLabel: 'Knowledge Check',
+    question: 'Name three Italian ingredients that appear across multiple dishes.',
+    answer: 'Focaccia (burger, meatball sub, bruschetta, omelet), Giardiniera (burger aioli, meatball sub), Ricotta (pizza, omelet). Also: provolone, Calabrian chili, marinara, radicchio.'
+  });
+
+  pool.push({
+    type: 'mc',
+    typeLabel: 'Menu Knowledge',
+    question: 'Which item is described as "the most Italian thing on the menu"?',
+    choices: ['Black Truffle Omelet', 'Bacon, Egg & Cheese Pizza', 'Dry Aged Meatball Sub', 'Caesar Salad'],
+    correct: 2,
+    explain: 'Dry Aged Meatball Sub — marinara, giardiniera, provolone, focaccia. Full Italian stack.'
+  });
+
+  return pool;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz() {
+  const pool = buildQuizPool();
+  quizQuestions = shuffle(pool).slice(0, QUIZ_COUNT);
+  quizIndex = 0;
+  quizCorrect = 0;
+  quizAnswered = 0;
+  document.getElementById('quiz-correct').textContent = '0';
+  document.getElementById('quiz-total').textContent = '0';
+  document.getElementById('quiz-complete').classList.remove('visible');
+  document.getElementById('quiz-area').innerHTML = '';
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  if (quizIndex >= quizQuestions.length) {
+    finishQuiz();
+    return;
+  }
+  const q = quizQuestions[quizIndex];
+  document.getElementById('quiz-progress-text').textContent = `Question ${quizIndex + 1} of ${quizQuestions.length}`;
+
+  const area = document.getElementById('quiz-area');
+  let html = `
+    <div class="quiz-card">
+      <div class="quiz-question-type">${q.typeLabel}</div>
+      <div class="quiz-question">${q.question}</div>
+  `;
+
+  if (q.type === 'mc') {
+    html += `<div class="quiz-choices" id="quiz-choices">`;
+    q.choices.forEach((ch, i) => {
+      html += `<button class="quiz-choice" data-idx="${i}" onclick="answerMC(${i})">${ch}</button>`;
+    });
+    html += `</div>`;
+    html += `<div class="quiz-answer" id="quiz-answer">${q.explain}</div>`;
+  }
+  html += `</div>`;
+
+  if (q.type === 'reveal') {
+    html += `<button class="quiz-reveal-btn" id="quiz-reveal-btn" onclick="revealAnswer()">Tap to Reveal Answer</button>`;
+    html += `<div class="quiz-answer" id="quiz-answer">${q.answer}</div>`;
+    html += `<div class="quiz-self-rate" id="quiz-self-rate">
+      <button class="rate-btn knew-it" onclick="selfRate(true)">&#x2705; Knew It</button>
+      <button class="rate-btn missed-it" onclick="selfRate(false)">&#x274C; Missed It</button>
+    </div>`;
+  }
+
+  html += `<button class="quiz-next-btn" id="quiz-next-btn" onclick="nextQuizQuestion()">Next Question</button>`;
+  area.innerHTML = html;
+}
+
+function answerMC(idx) {
+  const q = quizQuestions[quizIndex];
+  const buttons = document.querySelectorAll('#quiz-choices .quiz-choice');
+  buttons.forEach(b => b.disabled = true);
+
+  if (idx === q.correct) {
+    buttons[idx].classList.add('correct');
+    quizCorrect++;
+  } else {
+    buttons[idx].classList.add('wrong');
+    buttons[q.correct].classList.add('correct');
+  }
+  quizAnswered++;
+  document.getElementById('quiz-correct').textContent = quizCorrect;
+  document.getElementById('quiz-total').textContent = quizAnswered;
+  document.getElementById('quiz-answer').classList.add('visible');
+  document.getElementById('quiz-next-btn').classList.add('visible');
+}
+
+function revealAnswer() {
+  document.getElementById('quiz-reveal-btn').style.display = 'none';
+  document.getElementById('quiz-answer').classList.add('visible');
+  document.getElementById('quiz-self-rate').classList.add('visible');
+}
+
+function selfRate(correct) {
+  if (correct) quizCorrect++;
+  quizAnswered++;
+  document.getElementById('quiz-correct').textContent = quizCorrect;
+  document.getElementById('quiz-total').textContent = quizAnswered;
+  document.getElementById('quiz-self-rate').classList.remove('visible');
+  document.getElementById('quiz-next-btn').classList.add('visible');
+}
+
+function nextQuizQuestion() {
+  quizIndex++;
+  renderQuizQuestion();
+}
+
+function finishQuiz() {
+  document.getElementById('quiz-area').innerHTML = '';
+  document.getElementById('quiz-progress-text').textContent = 'Complete!';
+  const pct = Math.round((quizCorrect / quizQuestions.length) * 100);
+  const el = document.getElementById('quiz-complete');
+  el.classList.add('visible');
+
+  let emoji, msg, detail;
+  if (pct >= 90) {
+    emoji = '\u{1F525}'; msg = 'You\'re ready for the floor!'; detail = `${quizCorrect}/${quizQuestions.length} — You know this menu cold.`;
+  } else if (pct >= 70) {
+    emoji = '\u{1F4AA}'; msg = 'Nice work — almost there!'; detail = `${quizCorrect}/${quizQuestions.length} — Flip through the flashcards on the ones you missed.`;
+  } else if (pct >= 50) {
+    emoji = '\u{1F914}'; msg = 'Getting there!'; detail = `${quizCorrect}/${quizQuestions.length} — Spend some time in Learn mode, then come back and crush it.`;
+  } else {
+    emoji = '\u{1F4DA}'; msg = 'Time to study up!'; detail = `${quizCorrect}/${quizQuestions.length} — Hit Learn mode first, then try the quiz again. You got this.`;
+  }
+  document.getElementById('quiz-complete-emoji').textContent = emoji;
+  document.getElementById('quiz-complete-msg').textContent = msg;
+  document.getElementById('quiz-complete-detail').textContent = detail;
+}
+
+// =============================================
+// INIT
+// =============================================
+initLearn();
+initReference();
+startQuiz();
+</script>
+</body>
+</html>
