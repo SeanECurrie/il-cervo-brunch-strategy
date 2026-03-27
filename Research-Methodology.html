@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Methodology — Il Cervo Brunch Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EFE1D4;
+  --navy: #163963;
+  --cognac: #6A3414;
+  --light-navy: #395670;
+  --white: #fff;
+  --border: #d4c4b4;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--navy); line-height: 1.7; }
+.header { background: linear-gradient(135deg, var(--navy) 0%, var(--light-navy) 100%); color: var(--bg); padding: 3rem 2rem; text-align: center; }
+.header h1 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+.header p { opacity: 0.8; font-size: 0.95rem; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+h2 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--navy); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--cognac); }
+h3 { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--cognac); margin: 1.5rem 0 0.75rem; }
+p { margin-bottom: 1rem; }
+.intro-box { background: var(--white); border-left: 4px solid var(--cognac); padding: 1.25rem 1.5rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.88rem; }
+th { background: var(--navy); color: var(--bg); text-align: left; padding: 0.6rem 0.75rem; font-family: 'DM Serif Display', serif; font-size: 0.78rem; letter-spacing: 0.03em; }
+td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:hover td { background: rgba(22,57,99,0.04); }
+.domain-card { background: var(--white); border-radius: 8px; padding: 1.25rem; margin: 0.75rem 0; border: 1px solid var(--border); }
+.domain-card strong { color: var(--cognac); }
+.search-list { list-style: none; padding: 0; }
+.search-list li { padding: 0.35rem 0 0.35rem 1.5rem; position: relative; font-size: 0.9rem; }
+.search-list li::before { content: '→'; position: absolute; left: 0; color: var(--cognac); font-weight: 600; }
+.finding-box { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin: 0.75rem 0; }
+.finding-box .label { font-family: 'DM Serif Display', serif; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.finding-box .label.high { color: #2d7d3a; }
+.finding-box .label.moderate { color: #b45309; }
+.finding-box .label.low { color: #c53030; }
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.stat { background: var(--navy); color: var(--bg); border-radius: 8px; padding: 1.25rem; text-align: center; }
+.stat .num { font-family: 'DM Serif Display', serif; font-size: 2rem; display: block; }
+.stat .lbl { font-size: 0.78rem; opacity: 0.8; }
+.not-covered { list-style: none; padding: 0; }
+.not-covered li { padding: 0.4rem 0 0.4rem 1.75rem; position: relative; font-size: 0.9rem; }
+.not-covered li::before { content: '✕'; position: absolute; left: 0; color: #c53030; font-weight: 700; }
+.footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--light-navy); border-top: 1px solid var(--border); margin-top: 3rem; }
+@media (max-width: 600px) {
+  .header h1 { font-size: 1.3rem; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  table { font-size: 0.8rem; }
+  th, td { padding: 0.4rem 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Research Methodology &amp; Process</h1>
+  <p>Il Cervo Brunch Strategy &middot; Prepared for Chef Mike Sheerin &middot; March 2026</p>
+</div>
+
+<div class="container">
+
+<div class="intro-box">
+This document explains exactly how the research behind the Il Cervo Brunch Market Research report was conducted — what tools we used, what sources we tapped, how we validated findings, and what level of confidence you should have in each conclusion. This isn't a black box. Every finding has a trail.
+</div>
+
+<h2>Research Architecture</h2>
+<p>We used a <strong>four-domain parallel research approach</strong>, with each domain investigated independently before cross-referencing findings. This prevents one domain's assumptions from contaminating another's conclusions.</p>
+
+<table>
+  <thead><tr><th>Domain</th><th>What We Investigated</th><th>Why It Matters</th></tr></thead>
+  <tbody>
+    <tr><td><strong>A. Positioning Gap</strong></td><td>Milwaukee's brunch competitive landscape — who's doing what, where the gaps are</td><td>You can't position without knowing the field</td></tr>
+    <tr><td><strong>B. Friction &amp; Behavior</strong></td><td>What prevents people from trying new brunch spots, hotel dining barriers, parking</td><td>Great positioning fails if people can't or won't get there</td></tr>
+    <tr><td><strong>C. Opportunity Levers</strong></td><td>Your assets — Sheerin's credentials, Italian brunch concept, rooftop, Deer District, drag brunch</td><td>Knowing what you have determines what to lead with</td></tr>
+    <tr><td><strong>D. Marketing Landscape</strong></td><td>How Milwaukee restaurants market brunch, what works, what doesn't, media channels</td><td>Your marketing team needs direction, not just a budget</td></tr>
+  </tbody>
+</table>
+<p>After all four domains completed independently, we ran a <strong>cross-domain synthesis</strong> — looking for patterns that only become visible when you combine the findings.</p>
+
+<h2>Tools Used</h2>
+
+<h3>Primary Research Tools</h3>
+<table>
+  <thead><tr><th>Tool</th><th>What It Does</th><th>How We Used It</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Bright Data Search</strong></td><td>Searches Google/Bing with anti-detection, returns structured results</td><td>Found competitor brunch spots, review data, industry reports, pricing, Milwaukee food media</td></tr>
+    <tr><td><strong>Bright Data Scraper</strong></td><td>Scrapes any website as clean text, bypasses anti-bot protection</td><td>Scraped competitor restaurant pages, menus, pricing, review sites, trade publications</td></tr>
+    <tr><td><strong>Puppeteer Browser</strong></td><td>Full browser automation — navigate, screenshot, extract styles</td><td>Extracted Il Cervo's brand colors directly from ilcervorestaurant.com for report design</td></tr>
+  </tbody>
+</table>
+
+<h3>Three-Ring Methodology</h3>
+<p>Adapted from our nonprofit salary benchmarking methodology (proven on a 55-organization, 115-record project):</p>
+<table>
+  <thead><tr><th>Ring</th><th>What</th><th>Il Cervo Application</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Ring 1: Primary</strong></td><td>Direct evidence from the specific market</td><td>Milwaukee brunch competitor profiles, Il Cervo/Trade Hotel reviews, Deer District data</td></tr>
+    <tr><td><strong>Ring 2: Industry</strong></td><td>Published benchmarks and surveys</td><td>National brunch trends post-COVID, hotel restaurant best practices, marketing ROI data</td></tr>
+    <tr><td><strong>Ring 3: Context</strong></td><td>National patterns and trends</td><td>Brunch recovery nationwide, Italian brunch in other cities, hotel dining friction research</td></tr>
+  </tbody>
+</table>
+
+<h2>Research Execution by Domain</h2>
+
+<div class="domain-card">
+  <h3>Domain A: Positioning Gap &mdash; 14 searches, 5 scrapes</h3>
+  <p><strong>What we searched:</strong></p>
+  <ul class="search-list">
+    <li>"best brunch Milwaukee 2025 2026" + variations</li>
+    <li>"Milwaukee brunch Italian" (testing if anyone does it)</li>
+    <li>"Milwaukee rooftop brunch" (testing the view angle)</li>
+    <li>"Milwaukee brunch downtown vs third ward vs east side"</li>
+    <li>"Milwaukee drag brunch" (competitive themed landscape)</li>
+  </ul>
+  <p style="margin-top:0.75rem"><strong>What we found:</strong> 15 brunch competitors profiled. <strong>Zero Italian brunch in Milwaukee. Zero rooftop brunch above 3 floors.</strong></p>
+</div>
+
+<div class="domain-card">
+  <h3>Domain B: Friction &amp; Behavior &mdash; 26 searches, 8 scrapes</h3>
+  <ul class="search-list">
+    <li>"Trade Hotel Milwaukee dining reviews" + Il Cervo reviews</li>
+    <li>"hotel restaurant brunch challenges" + success factors</li>
+    <li>"Milwaukee downtown parking brunch" + Sunday parking rules</li>
+    <li>"brunch habits post COVID" (UCLA/Clemson, 34,000 respondents)</li>
+    <li>"Deer District Milwaukee foot traffic non-game day"</li>
+  </ul>
+  <p style="margin-top:0.75rem"><strong>What we found:</strong> A 6-layer friction stack. <strong>Sunday street parking is FREE in Milwaukee.</strong> Google hours show "4PM-12AM" — invisible to brunch searchers.</p>
+</div>
+
+<div class="domain-card">
+  <h3>Domain C: Opportunity Levers &mdash; 13 searches, 4 scrapes</h3>
+  <ul class="search-list">
+    <li>"Mike Sheerin chef Chicago" + awards + press</li>
+    <li>"Italian brunch menu trends 2025 2026"</li>
+    <li>"Deer District Milwaukee development" + new venues</li>
+    <li>"drag brunch to regular brunch conversion"</li>
+    <li>"Chicago chef Milwaukee reception"</li>
+  </ul>
+  <p style="margin-top:0.75rem"><strong>What we found:</strong> Sheerin is a <strong>Food &amp; Wine Best New Chef (2010)</strong>, Chicago Magazine Chef of the Year, trained at WD-50, Jean-Georges, Blackbird. <strong>Zero press connecting him to Il Cervo.</strong></p>
+</div>
+
+<div class="domain-card">
+  <h3>Domain D: Marketing Landscape &mdash; 23 searches, 6 scrapes</h3>
+  <ul class="search-list">
+    <li>Milwaukee food influencers/media (OnMilwaukee, Journal Sentinel, MKEeeeEats)</li>
+    <li>"restaurant brunch marketing strategies that work 2025"</li>
+    <li>"restaurant marketing ROI social media vs events vs influencers"</li>
+    <li>"how to brief a restaurant marketing team"</li>
+    <li>"email marketing restaurant ROI"</li>
+  </ul>
+  <p style="margin-top:0.75rem"><strong>What we found:</strong> Instagram-dominated via micro-influencers. <strong>Email marketing ($42 ROI per $1) is wide open</strong> — competitors don't do it. 7 failure modes documented.</p>
+</div>
+
+<h2>Source Quality Assessment</h2>
+
+<div class="finding-box">
+  <div class="label high">High Confidence</div>
+  <p>Multiple independent sources, primary data:</p>
+  <ul class="search-list">
+    <li>Il Cervo is the only Italian brunch in Milwaukee (verified against all 15 competitors)</li>
+    <li>Sunday street parking is free (verified against city parking website)</li>
+    <li>Sheerin's credentials — Food &amp; Wine, Blackbird, Jean-Georges (multiple press sources)</li>
+    <li>Google hours show 4PM-12AM (verified by direct observation)</li>
+    <li>Blue's Egg has 60+ minute waits (verified across multiple review sources)</li>
+  </ul>
+</div>
+
+<div class="finding-box">
+  <div class="label moderate">Moderate Confidence</div>
+  <p>Limited sources or indirect evidence:</p>
+  <ul class="search-list">
+    <li>Post-COVID brunch consolidation (Mike's account + national trend data, no Milwaukee-specific study)</li>
+    <li>Email marketing as open channel (national ROI data, no Milwaukee-specific study)</li>
+    <li>Deer District development timeline (press releases — completion dates may shift)</li>
+  </ul>
+</div>
+
+<div class="finding-box">
+  <div class="label low">Data Gaps — Need Mike's Input</div>
+  <ul class="search-list">
+    <li>Current brunch covers/revenue (no internal data)</li>
+    <li>Drag brunch to regular brunch conversion potential</li>
+    <li>Hotel guest vs. local ratio</li>
+    <li>Marketing team capabilities and current activities</li>
+  </ul>
+</div>
+
+<h2>What This Research Did NOT Cover</h2>
+<p>This was a <strong>landscape and positioning research phase</strong> — deliberately scoped to understand the market before making strategic recommendations.</p>
+<ul class="not-covered">
+  <li>Define a target demographic (needs Mike's operational input)</li>
+  <li>Design marketing campaigns (premature without positioning decisions)</li>
+  <li>Create a brunch menu analysis (Mike's expertise, not ours)</li>
+  <li>Project revenue or ROI (needs internal financial data)</li>
+  <li>Evaluate the marketing team's current work (need to see it first)</li>
+</ul>
+<p>These are <strong>next-phase activities</strong> informed by this research + Mike's feedback.</p>
+
+<h2>Total Research Effort</h2>
+<div class="stats-row">
+  <div class="stat"><span class="num">4</span><span class="lbl">Parallel research agents</span></div>
+  <div class="stat"><span class="num">76+</span><span class="lbl">Search queries</span></div>
+  <div class="stat"><span class="num">23+</span><span class="lbl">Pages scraped</span></div>
+  <div class="stat"><span class="num">100+</span><span class="lbl">Sources cited</span></div>
+  <div class="stat"><span class="num">15</span><span class="lbl">Competitor profiles</span></div>
+  <div class="stat"><span class="num">128K</span><span class="lbl">Research data</span></div>
+</div>
+
+</div>
+
+<div class="footer">
+  Il Cervo Brunch Strategy &middot; Research by Sean Currie &middot; March 2026
+</div>
+
+</body>
+</html>

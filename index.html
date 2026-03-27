@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Cervo Brunch Strategy — Research & Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EFE1D4;
+  --navy: #163963;
+  --cognac: #6A3414;
+  --light-navy: #395670;
+  --white: #FDFAF6;
+  --off-white: #F7F0E8;
+  --border: #D4C4B0;
+  --text: #2D2A26;
+  --text-light: #5A554E;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem 2rem 4rem;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.hero-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cognac);
+  background: rgba(106,52,20,0.08);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.8rem;
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span { color: var(--cognac); }
+
+.hero .subtitle {
+  font-size: 1.05rem;
+  color: var(--light-navy);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.hero .meta {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+/* SECTIONS */
+.section-header {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+
+.section-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  max-width: 640px;
+}
+
+/* CARD GRID */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px 28px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.25s ease;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(22,57,99,0.1);
+  border-color: var(--light-navy);
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.card-icon.primary { background: var(--navy); color: var(--bg); }
+.card-icon.cognac { background: var(--cognac); color: var(--bg); }
+.card-icon.light { background: var(--light-navy); color: var(--bg); }
+
+.card-body h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.card-body p {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.card-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cognac);
+  white-space: nowrap;
+}
+
+.card-arrow {
+  color: var(--border);
+  font-size: 1.2rem;
+  transition: color 0.25s, transform 0.25s;
+}
+
+.card:hover .card-arrow {
+  color: var(--cognac);
+  transform: translateX(3px);
+}
+
+/* FEATURED CARD */
+.featured {
+  border: 2px solid var(--navy);
+  background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
+}
+
+.featured .card-badge {
+  background: var(--navy);
+  color: var(--bg);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* SECTION DIVIDER */
+.section-group { margin-bottom: 2.5rem; }
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-light);
+}
+
+.footer a {
+  color: var(--cognac);
+  text-decoration: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .hero h1 { font-size: 2rem; }
+  .card { grid-template-columns: auto 1fr; padding: 18px 20px; }
+  .card-badge { display: none; }
+  .container { padding: 2rem 1.25rem 3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-label">Market Research & Strategic Analysis</div>
+    <h1>Il Cervo <span>Brunch Strategy</span></h1>
+    <p class="subtitle">Comprehensive market research for a brunch launch at Il Cervo, Trade Hotel, Milwaukee — competitive landscape, consumer behavior, opportunity analysis, and actionable go-to-market recommendations.</p>
+    <p class="meta">Prepared for Chef Mike Sheerin &middot; March 2026</p>
+  </div>
+
+  <!-- PRIMARY RESEARCH -->
+  <div class="section-group">
+    <h2 class="section-header">Research & Analysis</h2>
+    <p class="section-desc">The full market research report and supporting methodology — competitive landscape, consumer behavior, opportunity sizing, and marketing analysis across 50+ Milwaukee venues.</p>
+
+    <div class="card-grid">
+      <a href="Il-Cervo-Brunch-Market-Research.html" class="card featured">
+        <div class="card-icon primary">&#9733;</div>
+        <div class="card-body">
+          <h3>Full Market Research Report</h3>
+          <p>Complete analysis across four domains: positioning gaps, friction & behavior, opportunity levers, and marketing landscape. Interactive with sidebar navigation.</p>
+        </div>
+        <span class="card-badge">Start Here</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="Il-Cervo-Executive-Presentation.html" class="card">
+        <div class="card-icon cognac">&#9670;</div>
+        <div class="card-body">
+          <h3>Executive Briefing</h3>
+          <p>Presentation-format overview — key findings, market stats, strategic recommendations, and implementation timeline. Designed for quick stakeholder alignment.</p>
+        </div>
+        <span class="card-badge">Slides</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="data-sources-replacement.html" class="card">
+        <div class="card-icon light">&#128202;</div>
+        <div class="card-body">
+          <h3>Data Sources & Evidence Base</h3>
+          <p>Full bibliography of research sources, data quality assessment, and credibility tiers for every claim in the report.</p>
+        </div>
+        <span class="card-badge">Sources</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="Research-Methodology.html" class="card">
+        <div class="card-icon light">&#128270;</div>
+        <div class="card-body">
+          <h3>Research Methodology</h3>
+          <p>Three-ring research approach, data collection methods, and analytical framework used across all four research domains.</p>
+        </div>
+        <span class="card-badge">Process</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- MENU STRATEGY -->
+  <div class="section-group">
+    <h2 class="section-header">Menu Strategy</h2>
+    <p class="section-desc">Menu-specific analysis — competitive comparison, item-level recommendations, and direct response to Mike's menu questions.</p>
+
+    <div class="card-grid">
+      <a href="Menu-Recommendations.html" class="card">
+        <div class="card-icon cognac">&#127860;</div>
+        <div class="card-body">
+          <h3>Menu Recommendations</h3>
+          <p>Item-level recommendations for the brunch menu — pricing guidance, category balance, signature items, and differentiation strategy.</p>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="Menu-Response.html" class="card">
+        <div class="card-icon cognac">&#128172;</div>
+        <div class="card-body">
+          <h3>Menu Response</h3>
+          <p>Direct responses to Mike's specific menu questions with market data backing each recommendation.</p>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="Menu-Competitive-Comparison.html" class="card">
+        <div class="card-icon light">&#9878;</div>
+        <div class="card-body">
+          <h3>Competitive Menu Comparison</h3>
+          <p>Side-by-side analysis of brunch menus across Milwaukee's top venues — pricing tiers, category coverage, and white space opportunities.</p>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- OPERATIONAL TOOLS -->
+  <div class="section-group">
+    <h2 class="section-header">Operational Tools</h2>
+    <p class="section-desc">Ready-to-use materials for the team — FOH training handout, GM pre-shift briefing, and discovery prompts for ongoing market feedback.</p>
+
+    <div class="card-grid">
+      <a href="FOH-Brunch-Launch-Handout.html" class="card">
+        <div class="card-icon primary">&#128203;</div>
+        <div class="card-body">
+          <h3>FOH Brunch Launch Handout</h3>
+          <p>Front-of-house training document — menu story, key talking points, upsell guidance, and guest FAQ for the service team.</p>
+        </div>
+        <span class="card-badge">Print Ready</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="GM-PreShift-Presentation.html" class="card">
+        <div class="card-icon primary">&#127908;</div>
+        <div class="card-body">
+          <h3>GM Pre-Shift Presentation</h3>
+          <p>Slide-format briefing for the general manager to run pre-shift — launch goals, first-week targets, and service standards.</p>
+        </div>
+        <span class="card-badge">Presentation</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="Discovery-Prompts.html" class="card">
+        <div class="card-icon light">&#128161;</div>
+        <div class="card-body">
+          <h3>Discovery Prompts</h3>
+          <p>Structured questions for Mike to gather ongoing market intelligence — guest feedback loops, competitive monitoring, and expansion signals.</p>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Research conducted March 2026 &middot; <a href="Il-Cervo-Brunch-Market-Research.html">Full Report</a> &middot; <a href="Research-Methodology.html">Methodology</a></p>
+  </div>
+
+</div>
+
+</body>
+</html>

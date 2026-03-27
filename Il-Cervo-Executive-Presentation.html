@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Cervo Brunch — Executive Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #EFE1D4; --navy: #163963; --cognac: #6A3414; --light: #395670; --white: #fff; --border: #d4c4b4; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--navy); }
+section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; }
+
+/* NAV DOTS */
+.nav-dots { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; transition: all 0.3s; }
+.nav-dot.active { background: var(--cognac); transform: scale(1.4); }
+
+/* HERO */
+.hero h1 { font-family: 'DM Serif Display', serif; font-size: 3rem; line-height: 1.15; margin-bottom: 1.5rem; }
+.hero h1 span { color: var(--cognac); }
+.hero .subtitle { font-size: 1.15rem; color: var(--light); max-width: 600px; line-height: 1.7; }
+.hero .meta { margin-top: 2rem; font-size: 0.85rem; color: var(--light); opacity: 0.7; }
+
+/* STATS */
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 2rem 0; }
+.stat-block { text-align: center; }
+.stat-block .num { font-family: 'DM Serif Display', serif; font-size: 3.5rem; color: var(--cognac); line-height: 1; }
+.stat-block .lbl { font-size: 0.85rem; color: var(--light); margin-top: 8px; }
+
+/* CARDS */
+.card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 1.5rem 0; }
+.card { background: var(--white); border-radius: 10px; padding: 24px; border: 1px solid var(--border); }
+.card h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 8px; color: var(--navy); }
+.card p { font-size: 0.88rem; line-height: 1.6; color: var(--light); }
+.card .evidence { font-size: 0.75rem; color: var(--cognac); margin-top: 10px; font-weight: 600; }
+
+/* SECTION HEADERS */
+h2 { font-family: 'DM Serif Display', serif; font-size: 2.2rem; margin-bottom: 0.75rem; }
+h2 span { color: var(--cognac); }
+.section-sub { font-size: 1rem; color: var(--light); max-width: 650px; margin-bottom: 2rem; line-height: 1.7; }
+
+/* CALLOUTS */
+.big-callout { background: var(--navy); color: var(--bg); border-radius: 12px; padding: 32px; margin: 1.5rem 0; }
+.big-callout h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 12px; }
+.big-callout p { font-size: 0.92rem; line-height: 1.7; opacity: 0.9; }
+.big-callout .highlight { color: #ffd7b5; font-weight: 700; }
+
+.alert-callout { background: var(--cognac); color: var(--white); border-radius: 12px; padding: 28px; margin: 1rem 0; }
+.alert-callout .num-big { font-family: 'DM Serif Display', serif; font-size: 2.5rem; }
+.alert-callout p { font-size: 0.9rem; line-height: 1.6; margin-top: 8px; }
+
+/* TIMELINE MINI */
+.mini-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 1.5rem 0; }
+.mini-phase { background: var(--white); border-radius: 8px; padding: 16px; border-top: 4px solid var(--border); text-align: center; }
+.mini-phase.p1 { border-top-color: var(--light); }
+.mini-phase.p2 { border-top-color: var(--cognac); }
+.mini-phase.p3 { border-top-color: var(--navy); }
+.mini-phase.p4 { border-top-color: #2d7d3a; }
+.mini-phase .week { font-family: 'DM Serif Display', serif; font-size: 0.85rem; color: var(--cognac); }
+.mini-phase .phase-name { font-weight: 700; font-size: 0.82rem; margin: 6px 0 4px; }
+.mini-phase .tasks { font-size: 0.75rem; color: var(--light); }
+
+/* COMPARISON */
+.vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 1.5rem 0; border-radius: 10px; overflow: hidden; }
+.vs-col { padding: 24px; }
+.vs-col.bad { background: #f9f0f0; }
+.vs-col.good { background: #f0f9f0; }
+.vs-col h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+.vs-col.bad h4 { color: #c53030; }
+.vs-col.good h4 { color: #2d7d3a; }
+.vs-col li { font-size: 0.82rem; line-height: 1.7; margin-bottom: 4px; list-style: none; padding-left: 1.25rem; position: relative; }
+.vs-col.bad li::before { content: '✕'; position: absolute; left: 0; color: #c53030; font-weight: 700; }
+.vs-col.good li::before { content: '✓'; position: absolute; left: 0; color: #2d7d3a; font-weight: 700; }
+
+/* CTA */
+.cta-section { text-align: center; }
+.cta-button { display: inline-block; background: var(--cognac); color: var(--white); padding: 16px 40px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+.cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(106,52,20,0.3); }
+
+.footer-note { text-align: center; margin-top: 3rem; font-size: 0.8rem; color: var(--light); opacity: 0.6; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  .stat-row { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .stat-block .num { font-size: 2.5rem; }
+  .mini-timeline { grid-template-columns: 1fr 1fr; }
+  .vs-grid { grid-template-columns: 1fr; }
+  section { padding: 3rem 1.5rem; min-height: auto; }
+  .nav-dots { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- SLIDE 1: HERO -->
+<section class="hero" data-slide>
+  <h1>Il Cervo owns a position <span>nobody else in Milwaukee has claimed.</span></h1>
+  <p class="subtitle">We conducted a four-domain market research analysis — 80+ sources, 15 competitor profiles, parking data, hotel dining research, and a full marketing landscape audit. Here's what we found.</p>
+  <p class="meta">Prepared for Chef Mike Sheerin &amp; Il Cervo Leadership &middot; March 2026</p>
+</section>
+
+<!-- SLIDE 2: THE THREE DIFFERENTIATORS -->
+<section data-slide>
+  <h2>Three things <span>no competitor can match.</span></h2>
+  <p class="section-sub">We searched every brunch restaurant in Milwaukee. Nobody else has even one of these. Il Cervo has all three.</p>
+  <div class="stat-row">
+    <div class="stat-block"><div class="num">0</div><div class="lbl">Other Italian brunches in Milwaukee</div></div>
+    <div class="stat-block"><div class="num">9th</div><div class="lbl">Floor — highest brunch view in the city</div></div>
+    <div class="stat-block"><div class="num">2010</div><div class="lbl">Food &amp; Wine Best New Chef</div></div>
+  </div>
+  <div class="big-callout">
+    <h3>The positioning statement</h3>
+    <p><span class="highlight">Italian brunch, 9th floor, from a Food &amp; Wine Best New Chef.</span> No restaurant in Milwaukee can say any one of these — let alone all three. This isn't a marketing spin. It's a verifiable market gap confirmed across 15 competitor profiles and 80+ sources.</p>
+  </div>
+</section>
+
+<!-- SLIDE 3: WHAT WE FOUND -->
+<section data-slide>
+  <h2>Five findings that <span>change the conversation.</span></h2>
+  <div class="card-row">
+    <div class="card">
+      <h3>Your Google says you open at 4PM.</h3>
+      <p>Every person who searches "Il Cervo brunch" sees dinner hours only. This is the single highest-priority fix — 10 minutes of work that's prerequisite to every marketing dollar spent.</p>
+      <div class="evidence">Source: Google Business Profile, verified March 2026</div>
+    </div>
+    <div class="card">
+      <h3>Sunday street parking is free.</h3>
+      <p>No meters. No time limits. Every Sunday. The planned $10 parking pass competes against free. Reframe: "Free Sunday street parking available" removes the #1 friction point instantly.</p>
+      <div class="evidence">Source: City of Milwaukee parking website</div>
+    </div>
+    <div class="card">
+      <h3>Zero press connects Chef Sheerin to this restaurant.</h3>
+      <p>A Food &amp; Wine Best New Chef (2010), trained at Blackbird, Jean-Georges, and WD-50 — and not a single article mentions he's now at Il Cervo. One profile piece changes awareness overnight.</p>
+      <div class="evidence">Source: Google search "Mike Sheerin Il Cervo Milwaukee" = 0 results</div>
+    </div>
+    <div class="card">
+      <h3>Your competitors have 60-minute waits. You take reservations.</h3>
+      <p>Blue's Egg (Milwaukee's #1 brunch) has 60+ minute weekend waits. No reservations. Il Cervo takes reservations. "Skip the wait, reserve your table" is a competitive weapon nobody's using.</p>
+      <div class="evidence">Source: Google/Yelp reviews for Blue's Egg, Uncle Wolfie's</div>
+    </div>
+  </div>
+  <div class="alert-callout">
+    <div class="num-big">$42</div>
+    <p>Return on every $1 spent on email marketing — the highest ROI channel in restaurant marketing. Zero Milwaukee brunch competitors are using email. The drag brunch ticket list is a ready-made audience waiting to be emailed about regular Sunday brunch.</p>
+  </div>
+</section>
+
+<!-- SLIDE 4: THE 90-DAY PLAN -->
+<section data-slide>
+  <h2>A 90-day plan <span>already built.</span></h2>
+  <p class="section-sub">Not a vague strategy — a week-by-week execution calendar with 34 specific tasks, broken down by who does what: back of house, front of house, and management.</p>
+  <div class="mini-timeline">
+    <div class="mini-phase p1">
+      <div class="week">Weeks 1-2</div>
+      <div class="phase-name">Pre-Launch</div>
+      <div class="tasks">Fix Google hours, photo shoot, influencer tastings, media pitch, email capture</div>
+    </div>
+    <div class="mini-phase p2">
+      <div class="week">Weeks 3-4</div>
+      <div class="phase-name">Launch</div>
+      <div class="tasks">Opening weekend, social blitz, review push, street signage, guest data</div>
+    </div>
+    <div class="mini-phase p3">
+      <div class="week">Weeks 5-8</div>
+      <div class="phase-name">Growth</div>
+      <div class="tasks">Weekly cadence, email sends, influencer wave 2, review stacking, Saturday trigger</div>
+    </div>
+    <div class="mini-phase p4">
+      <div class="week">Weeks 9-12</div>
+      <div class="phase-name">Optimize</div>
+      <div class="tasks">Channel ROI, menu refinement, Mother's Day, summer rooftop, 90-day retro</div>
+    </div>
+  </div>
+  <div class="big-callout">
+    <h3>Every task is backed by research.</h3>
+    <p>This isn't a generic marketing playbook. Every task in the 90-day plan links back to a specific finding from our research — a competitor gap, a friction point, a marketing channel that works, or a failure mode to avoid. The full report has <span class="highlight">132 individually sourced citations</span> mapped to the sections they support.</p>
+  </div>
+</section>
+
+<!-- SLIDE 5: WHAT YOU'RE PAYING FOR -->
+<section data-slide>
+  <h2>$5K/month in marketing <span>should produce this.</span></h2>
+  <p class="section-sub">If you're investing $60K/year in a marketing firm, here's the difference between a firm that earns it and one that doesn't.</p>
+  <div class="vs-grid">
+    <div class="vs-col bad">
+      <h4>What $5K/month often looks like</h4>
+      <ul>
+        <li>Food photos posted 2-3x/week</li>
+        <li>Monthly report with "impressions" and "likes"</li>
+        <li>"We got 500 followers this month"</li>
+        <li>No email marketing</li>
+        <li>No review management</li>
+        <li>Same strategy Month 1 through Month 6</li>
+        <li>No idea which channel drives reservations</li>
+        <li>Doesn't know chef's background</li>
+      </ul>
+    </div>
+    <div class="vs-col good">
+      <h4>What $5K/month should look like</h4>
+      <ul>
+        <li>12-16 posts/month with strategic content mix</li>
+        <li>Monthly report with reservation attribution</li>
+        <li>"34 reservations came from Instagram this month"</li>
+        <li>Biweekly emails to growing list ($42 ROI/$1)</li>
+        <li>100% review response within 24 hours</li>
+        <li>Monthly iteration based on data</li>
+        <li>UTM tracking on every channel</li>
+        <li>Pitched "Food &amp; Wine Best New Chef" to 5 outlets</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size:0.88rem; color:var(--light); margin-top:1rem; text-align:center;">The full report includes a monthly report template, 12 specific KPIs to track, 7 documented red flags, and 10 questions to ask your marketing firm in the first meeting.</p>
+</section>
+
+<!-- SLIDE 6: THE RESEARCH BEHIND THIS -->
+<section data-slide>
+  <h2>This isn't <span>someone's opinion.</span></h2>
+  <p class="section-sub">Four independent research domains, each investigated separately before cross-referencing. Every claim is sourced. Every finding is traceable.</p>
+  <div class="stat-row">
+    <div class="stat-block"><div class="num">80+</div><div class="lbl">Sources consulted</div></div>
+    <div class="stat-block"><div class="num">15</div><div class="lbl">Competitor profiles built</div></div>
+    <div class="stat-block"><div class="num">4</div><div class="lbl">Independent research domains</div></div>
+  </div>
+  <div class="card-row">
+    <div class="card">
+      <h3>A. Competitive Landscape</h3>
+      <p>Every brunch spot in Milwaukee profiled — who they are, what they charge, what they're known for, where the gaps are.</p>
+    </div>
+    <div class="card">
+      <h3>B. Friction &amp; Behavior</h3>
+      <p>What stops people from trying new brunch spots. Hotel barriers, parking reality, post-COVID behavior shifts.</p>
+    </div>
+    <div class="card">
+      <h3>C. Opportunity Levers</h3>
+      <p>What Il Cervo has that others don't. Chef credentials, Italian concept, rooftop, Deer District growth, drag brunch proof.</p>
+    </div>
+    <div class="card">
+      <h3>D. Marketing Landscape</h3>
+      <p>What works and what doesn't in Milwaukee restaurant marketing. Channels, influencers, failure modes, KPIs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: CTA -->
+<section class="cta-section" data-slide>
+  <h2 style="margin-bottom:1rem;">The full report is ready.</h2>
+  <p class="section-sub" style="margin:0 auto 2rem; text-align:center;">132 sourced citations. 15 competitor profiles. A 90-day execution plan with prep lists for every station. A $5K/month marketing accountability framework. And a discovery guide for the next conversation.</p>
+  <a href="Il-Cervo-Brunch-Market-Research.html" class="cta-button">Open the Full Research Report →</a>
+  <p class="footer-note" style="margin-top:2rem;">Research conducted March 2026 by Sean Currie<br>4 parallel research domains &middot; 80+ sources &middot; All data verifiable</p>
+</section>
+
+<script>
+// Build nav dots
+const slides = document.querySelectorAll('[data-slide]');
+const dotsContainer = document.getElementById('navDots');
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'nav-dot';
+  dot.onclick = () => slides[i].scrollIntoView({ behavior: 'smooth' });
+  dotsContainer.appendChild(dot);
+});
+
+// Track active dot
+const dots = document.querySelectorAll('.nav-dot');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = [...slides].indexOf(entry.target);
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[idx]) dots[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

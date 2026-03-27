@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Competitive Comparison — Il Cervo vs Milwaukee</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #EFE1D4; --navy: #163963; --cognac: #6A3414; --light: #395670; --white: #fff; --border: #d4c4b4; --green: #2d7d3a; --red: #c53030; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--navy); line-height: 1.6; }
+
+.header { background: linear-gradient(135deg, var(--navy) 0%, var(--light) 100%); color: var(--bg); padding: 36px 40px; max-width: 1100px; margin: 0 auto; }
+.header h1 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 6px; }
+.header p { opacity: 0.8; font-size: 0.9rem; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 24px 40px 60px; }
+h2 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--navy); margin: 2rem 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--cognac); }
+p { font-size: 0.9rem; margin-bottom: 12px; }
+
+/* MATRIX TABLE */
+.matrix-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.78rem; min-width: 900px; }
+thead th { background: var(--navy); color: var(--bg); padding: 10px 8px; text-align: center; font-weight: 600; position: sticky; top: 0; z-index: 2; }
+thead th:first-child { text-align: left; min-width: 160px; position: sticky; left: 0; z-index: 3; }
+tbody td { padding: 8px; text-align: center; border-bottom: 1px solid var(--border); background: var(--white); vertical-align: middle; }
+tbody td:first-child { text-align: left; font-weight: 600; color: var(--navy); position: sticky; left: 0; background: var(--white); z-index: 1; border-right: 2px solid var(--border); min-width: 160px; }
+tbody tr:hover td { background: #faf6f2; }
+tbody tr:hover td:first-child { background: #faf6f2; }
+
+/* Cell states */
+.yes { color: var(--green); font-weight: 700; }
+.no { color: #ccc; }
+.unique { color: var(--cognac); font-weight: 800; font-size: 0.85rem; }
+.similar { color: var(--light); }
+
+/* Il Cervo column highlight */
+thead th.cervo-col { background: var(--cognac); }
+tbody td.cervo-col { background: #fdf8f5; border-left: 2px solid var(--cognac); border-right: 2px solid var(--cognac); font-weight: 600; }
+tbody tr:hover td.cervo-col { background: #faf0e8; }
+
+/* SUMMARY CARDS */
+.summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+.summary-card { background: var(--white); border-radius: 10px; padding: 20px; text-align: center; border: 1px solid var(--border); }
+.summary-card .big { font-family: 'DM Serif Display', serif; font-size: 2.5rem; }
+.summary-card .big.green { color: var(--green); }
+.summary-card .big.cognac { color: var(--cognac); }
+.summary-card .big.navy { color: var(--navy); }
+.summary-card .label { font-size: 0.82rem; color: var(--light); margin-top: 4px; }
+
+/* UNIQUE ITEMS */
+.unique-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+.unique-item { background: var(--white); border: 2px solid var(--cognac); border-radius: 8px; padding: 14px 18px; }
+.unique-item .name { font-weight: 700; color: var(--cognac); font-size: 0.92rem; margin-bottom: 4px; }
+.unique-item .why { font-size: 0.82rem; color: var(--light); }
+.unique-item .count { font-family: 'DM Serif Display', serif; color: var(--navy); font-size: 1.1rem; float: right; }
+
+/* TREND BAR */
+.trend-bar-wrap { margin: 8px 0; }
+.trend-row { display: grid; grid-template-columns: 160px 1fr 40px; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0ebe5; font-size: 0.82rem; }
+.trend-row .cat-name { font-weight: 600; }
+.trend-bar-bg { height: 20px; background: #f0ebe5; border-radius: 4px; overflow: hidden; }
+.trend-bar-fill { height: 100%; border-radius: 4px; }
+.trend-bar-fill.high { background: var(--green); }
+.trend-bar-fill.med { background: #d97706; }
+.trend-bar-fill.low { background: var(--cognac); }
+.trend-bar-fill.zero { background: var(--cognac); }
+
+.callout { border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 0.88rem; }
+.callout.insight { background: var(--white); border: 2px solid var(--navy); }
+.callout.insight strong { color: var(--navy); }
+.callout.opportunity { background: #f0f9f0; border: 2px solid var(--green); }
+.callout.opportunity strong { color: var(--green); }
+
+.footer { text-align: center; padding: 24px; font-size: 0.75rem; color: var(--light); border-top: 1px solid var(--border); margin-top: 32px; }
+
+@media (max-width: 768px) {
+  .header, .container { padding-left: 16px; padding-right: 16px; }
+  .summary-grid { grid-template-columns: 1fr; }
+  .unique-list { grid-template-columns: 1fr; }
+  .trend-row { grid-template-columns: 120px 1fr 30px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>How Il Cervo's Menu Compares</h1>
+  <p>Mike's brunch menu vs. Milwaukee's top 10 brunch spots — what's common, what's rare, and what nobody else has.</p>
+</div>
+
+<div class="container">
+
+<p>We checked every menu item against the top 10 Milwaukee brunch competitors. For each brunch category, we tracked: how many competitors offer something similar, and whether Il Cervo's version is differentiated or just another option in a crowded field.</p>
+
+<!-- SUMMARY STATS -->
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="big cognac">4</div>
+    <div class="label">Items nobody else in Milwaukee has</div>
+  </div>
+  <div class="summary-card">
+    <div class="big green">3</div>
+    <div class="label">Items with a clear twist vs. competitors</div>
+  </div>
+  <div class="summary-card">
+    <div class="big navy">3</div>
+    <div class="label">Items in crowded categories (need the story)</div>
+  </div>
+</div>
+
+<!-- MAIN COMPARISON MATRIX -->
+<h2>The Full Comparison Matrix</h2>
+<p>✦ = Il Cervo has it &nbsp; ✓ = Competitor has similar &nbsp; — = Not on their menu &nbsp; <span style="color:var(--cognac); font-weight:700;">★ = Only Il Cervo</span></p>
+
+<div class="matrix-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Menu Category</th>
+      <th class="cervo-col">Il Cervo</th>
+      <th>Blue's Egg</th>
+      <th>Uncle Wolfie's</th>
+      <th>Benelux</th>
+      <th>Sweet Diner</th>
+      <th>Tre Rivali</th>
+      <th>Story Hill</th>
+      <th>Honeypie</th>
+      <th>Harbor House</th>
+      <th>Lupi & Iris</th>
+      <th>Edison</th>
+      <th># With Similar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Truffle Omelet</strong></td>
+      <td class="cervo-col"><span class="unique">★ $22</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="unique">0 — ONLY YOU</span></td>
+    </tr>
+    <tr>
+      <td><strong>Caviar Add-On</strong></td>
+      <td class="cervo-col"><span class="unique">★ +$25</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="unique">0 — ONLY YOU</span></td>
+    </tr>
+    <tr>
+      <td><strong>Gold-Leaf Anything</strong></td>
+      <td class="cervo-col"><span class="unique">★ $22</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="unique">0 — ONLY YOU</span></td>
+    </tr>
+    <tr>
+      <td><strong>Dry Aged Beef (any item)</strong></td>
+      <td class="cervo-col"><span class="unique">★ $24</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="unique">1 — Nearly Exclusive</span></td>
+    </tr>
+    <tr>
+      <td><strong>Breakfast/Brunch Pizza</strong></td>
+      <td class="cervo-col"><span class="yes">✦ $25-26</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓ $19</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span style="color:var(--cognac); font-weight:600;">1 — Rare (Tre Rivali)</span></td>
+    </tr>
+    <tr>
+      <td><strong>Truffle Add-On (any item)</strong></td>
+      <td class="cervo-col"><span class="unique">★ +$25</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="unique">0 — ONLY YOU</span></td>
+    </tr>
+    <tr>
+      <td><strong>Meatball Sub / Sandwich</strong></td>
+      <td class="cervo-col"><span class="yes">✦ $24</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="unique">0 — ONLY YOU</span></td>
+    </tr>
+    <tr>
+      <td><strong>Salmon / Lox / Gravlax</strong></td>
+      <td class="cervo-col"><span class="yes">✦ $15</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓ $17</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓ buffet</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="no">—</span></td>
+      <td><span style="color:var(--cognac); font-weight:600;">3 — Differentiated by focaccia + Calabrian</span></td>
+    </tr>
+    <tr style="background:#f9f6f2;">
+      <td><strong>French Toast</strong></td>
+      <td class="cervo-col"><span class="yes">✦ $22</span></td>
+      <td><span class="yes">✓ $14</span></td>
+      <td><span class="yes">✓ $16</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓ $14</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓ $14</span></td>
+      <td><span class="yes">✓ brunch</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="similar">5 — Common BUT yours has gold (unique)</span></td>
+    </tr>
+    <tr style="background:#f9f6f2;">
+      <td><strong>Burger</strong></td>
+      <td class="cervo-col"><span class="yes">✦ $24</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓ $22</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓ $17</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="similar">3 — Common BUT yours is dry aged (unique)</span></td>
+    </tr>
+    <tr style="background:#f9f6f2;">
+      <td><strong>Steak & Eggs</strong></td>
+      <td class="cervo-col"><span class="yes">✦ $28</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓ $24</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="similar">2 — Uncommon, hanger steak differentiates</span></td>
+    </tr>
+    <tr style="background:#f9f6f2;">
+      <td><strong>Caesar Salad</strong></td>
+      <td class="cervo-col"><span class="yes">✦ $14</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="similar">4 — Common (preserved garlic is the twist)</span></td>
+    </tr>
+    <tr style="background:#f9f6f2;">
+      <td><strong>Specialty Salad</strong></td>
+      <td class="cervo-col"><span class="yes">✦ $19</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="no">—</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="yes">✓</span></td>
+      <td><span class="similar">9 — Very Common</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- WHAT'S UNIQUE -->
+<h2>What Nobody Else Has</h2>
+<p>These items exist at zero or one competitor in Milwaukee. They are your competitive moat.</p>
+
+<div class="unique-list">
+  <div class="unique-item">
+    <span class="count">0/10</span>
+    <div class="name">Truffle Omelet + Caviar Service</div>
+    <div class="why">No brunch in Milwaukee offers truffle OR caviar, let alone both. A $47 omelet is a tier that doesn't exist in this market. This IS the luxury differentiator.</div>
+  </div>
+  <div class="unique-item">
+    <span class="count">0/10</span>
+    <div class="name">24 Carat Gold French Toast</div>
+    <div class="why">5 competitors serve French toast. None put gold on it. The category is common — YOUR version is the only one people will text their friends about.</div>
+  </div>
+  <div class="unique-item">
+    <span class="count">0/10</span>
+    <div class="name">Dry Aged Meatball Sub on Focaccia</div>
+    <div class="why">No competitor has a meatball sub at brunch. Dry aged beef meatballs on house focaccia is the most overtly Italian item you have. Own it.</div>
+  </div>
+  <div class="unique-item">
+    <span class="count">0/10</span>
+    <div class="name">Truffle Add-On Option (Pizza)</div>
+    <div class="why">No competitor offers truffle as a brunch add-on. A $51 truffle BEC pizza is absurd in the best way — it's the shareable showpiece that generates stories.</div>
+  </div>
+</div>
+
+<!-- CATEGORY SATURATION -->
+<h2>Category Saturation: How Crowded Is Each Lane?</h2>
+<p>How many of the top 10 Milwaukee brunch spots have something similar to each Il Cervo item:</p>
+
+<div class="trend-bar-wrap">
+  <div class="trend-row">
+    <span class="cat-name" style="color:var(--cognac);">Truffle Omelet</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill zero" style="width:2%;"></div></div>
+    <span style="font-weight:700; color:var(--cognac);">0</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name" style="color:var(--cognac);">Caviar at Brunch</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill zero" style="width:2%;"></div></div>
+    <span style="font-weight:700; color:var(--cognac);">0</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name" style="color:var(--cognac);">Gold-Leaf Dish</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill zero" style="width:2%;"></div></div>
+    <span style="font-weight:700; color:var(--cognac);">0</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name" style="color:var(--cognac);">Meatball Sub</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill zero" style="width:2%;"></div></div>
+    <span style="font-weight:700; color:var(--cognac);">0</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name" style="color:var(--cognac);">Truffle Add-On</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill zero" style="width:2%;"></div></div>
+    <span style="font-weight:700; color:var(--cognac);">0</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name">Brunch Pizza</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill low" style="width:10%;"></div></div>
+    <span>1</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name">Dry Aged Beef</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill low" style="width:10%;"></div></div>
+    <span>1</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name">Steak & Eggs</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill low" style="width:20%;"></div></div>
+    <span>2</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name">Salmon/Gravlax</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill med" style="width:30%;"></div></div>
+    <span>3</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name">Burger</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill med" style="width:30%;"></div></div>
+    <span>3</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name">Caesar Salad</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill med" style="width:40%;"></div></div>
+    <span>4</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name">French Toast</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill high" style="width:50%;"></div></div>
+    <span>5</span>
+  </div>
+  <div class="trend-row">
+    <span class="cat-name">Specialty Salad</span>
+    <div class="trend-bar-bg"><div class="trend-bar-fill high" style="width:90%;"></div></div>
+    <span>9</span>
+  </div>
+</div>
+
+<div class="callout insight">
+  <strong>The pattern:</strong> Your most unique items (truffle, caviar, gold, dry aged, meatball sub) are at the TOP — zero competitors. Your most common items (salads, French toast) are at the BOTTOM. The menu is structured so that <strong>the items that make you different are also the items with the highest margins.</strong> That's not an accident — that's a chef who understands business.
+</div>
+
+<!-- WHAT THIS MEANS -->
+<h2>What This Means for Marketing</h2>
+
+<div class="callout opportunity">
+  <strong>Lead with what nobody has.</strong> When the marketing team creates content, when influencers come in, when press writes about you — the story isn't "we have brunch." The story is: "We have a $47 truffle-and-caviar omelet, gold-dusted French toast, and dry aged meatball subs on house focaccia. On the 9th floor. From a Food & Wine Best New Chef. Nobody else in Milwaukee has ANY of this."
+</div>
+
+<p><strong>The common items</strong> (Caesar, beet salad, French toast base concept, burger base concept) are fine to have — they give guests familiar entry points. But they don't differentiate. Don't lead marketing with the Caesar salad. Lead with the gold.</p>
+
+<p><strong>The items with 1-3 competitors</strong> (pizza, steak & eggs, salmon, burger) are in the middle — not unique but not crowded either. These differentiate through EXECUTION: dry aged beef vs. regular, focaccia vs. brioche, Calabrian aioli vs. regular aioli, hanger steak vs. flat iron. <strong>The FOH story is what separates these from the competition.</strong></p>
+
+<h2>Items Competitors Have That You Don't</h2>
+<p>Categories that are popular across Milwaukee brunch but absent from Il Cervo's menu. These aren't necessarily gaps to fill — they're just context for what the market expects.</p>
+
+<div class="matrix-wrap">
+<table style="min-width:600px;">
+  <thead>
+    <tr>
+      <th style="text-align:left;">Category</th>
+      <th># of Top 10 With It</th>
+      <th>Examples</th>
+      <th>Il Cervo Has?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Eggs Benedict</strong></td>
+      <td style="text-align:center;">7</td>
+      <td style="font-size:0.75rem;">Blue's Egg (5 variants), Sweet Diner, Harbor House, Tre Rivali, Cafe Benelux</td>
+      <td style="text-align:center;"><span class="no">No</span></td>
+    </tr>
+    <tr>
+      <td><strong>Pancakes / Waffles</strong></td>
+      <td style="text-align:center;">8</td>
+      <td style="font-size:0.75rem;">Uncle Wolfie's, Honeypie, Sweet Diner, Blue's Egg, Tre Rivali (Belgian waffle)</td>
+      <td style="text-align:center;"><span class="no">No</span></td>
+    </tr>
+    <tr>
+      <td><strong>Hash / Skillet</strong></td>
+      <td style="text-align:center;">6</td>
+      <td style="font-size:0.75rem;">Blue's Egg (hoppel poppel), Cafe Benelux (short rib hash), Story Hill, Honeypie</td>
+      <td style="text-align:center;"><span class="no">No</span></td>
+    </tr>
+    <tr>
+      <td><strong>Standard Omelet</strong></td>
+      <td style="text-align:center;">5</td>
+      <td style="font-size:0.75rem;">Blue's Egg (3 variants), Tre Rivali (Za'atar, Heartland), Sweet Diner (Wisconsin)</td>
+      <td style="text-align:center;"><span style="color:var(--cognac);">Truffle only</span></td>
+    </tr>
+    <tr>
+      <td><strong>Breakfast Burrito / Wrap</strong></td>
+      <td style="text-align:center;">3</td>
+      <td style="font-size:0.75rem;">Honeypie, Uncle Wolfie's</td>
+      <td style="text-align:center;"><span class="no">No</span></td>
+    </tr>
+    <tr>
+      <td><strong>Bloody Mary (featured)</strong></td>
+      <td style="text-align:center;">7</td>
+      <td style="font-size:0.75rem;">Cafe Benelux (award-winning), Tre Rivali ($25 charcuterie Bloody), Sweet Diner, Honeypie</td>
+      <td style="text-align:center;"><span style="color:var(--light);">Unknown — drink menu not provided</span></td>
+    </tr>
+    <tr>
+      <td><strong>Shakshuka / Chilaquiles</strong></td>
+      <td style="text-align:center;">3</td>
+      <td style="font-size:0.75rem;">Story Hill (shakshuka), Honeypie (chilaquiles), Sweet Diner (chilaquiles)</td>
+      <td style="text-align:center;"><span class="no">No</span></td>
+    </tr>
+    <tr>
+      <td><strong>Avocado Toast</strong></td>
+      <td style="text-align:center;">4</td>
+      <td style="font-size:0.75rem;">Tre Rivali, Sweet Diner, various</td>
+      <td style="text-align:center;"><span class="no">No (gravlax bruschetta fills this lane)</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout insight">
+  <strong>The notable absences:</strong> No Benedict, no pancakes/waffles (the French toast covers sweet), no hash/skillet, no standard omelet options. This is a deliberate choice — the menu is tight (10 items) and doesn't try to be everything. But it means someone who comes specifically wanting "eggs Benedict" won't find it. <strong>The question for Mike:</strong> Is the tight menu intentional? 10 items is lean. The upside is kitchen focus and quality. The downside is fewer entry points for the brunch-conservative guest.
+</div>
+
+</div>
+
+<div class="footer">
+  Il Cervo Menu Competitive Comparison &middot; Based on menu data from 10 Milwaukee brunch competitors &middot; March 2026<br>
+  Competitor menus sourced from restaurant websites, Toast/UberEats listings, and review sites
+</div>
+
+</body>
+</html>

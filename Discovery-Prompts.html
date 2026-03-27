@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discovery Prompts — Il Cervo Brunch Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EFE1D4;
+  --navy: #163963;
+  --cognac: #6A3414;
+  --light-navy: #395670;
+  --white: #fff;
+  --border: #d4c4b4;
+  --green: #2d7d3a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--navy); line-height: 1.7; }
+.header { background: linear-gradient(135deg, var(--navy) 0%, var(--light-navy) 100%); color: var(--bg); padding: 3rem 2rem; text-align: center; }
+.header h1 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+.header p { opacity: 0.8; font-size: 0.95rem; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.how-to { background: var(--white); border-left: 4px solid var(--cognac); padding: 1.25rem 1.5rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; }
+.how-to strong { color: var(--cognac); }
+h2 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--navy); margin: 2.5rem 0 0.75rem; }
+h2 .num { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background: var(--cognac); color: var(--bg); border-radius: 50%; font-size: 0.85rem; margin-right: 0.5rem; }
+h3 { font-family: 'DM Serif Display', serif; font-size: 0.95rem; color: var(--cognac); margin: 1.25rem 0 0.5rem; }
+p { margin-bottom: 0.75rem; font-size: 0.95rem; }
+
+.prompt-group { margin: 1rem 0 1.5rem; }
+.prompt { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin: 0.6rem 0; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
+.prompt:hover { border-color: var(--cognac); box-shadow: 0 2px 8px rgba(22,57,99,0.08); }
+.prompt .q { font-weight: 600; color: var(--navy); }
+.prompt .why { font-size: 0.82rem; color: var(--light-navy); margin-top: 0.3rem; font-style: italic; display: none; }
+.prompt.open .why { display: block; }
+.prompt .toggle { float: right; color: var(--cognac); font-size: 0.8rem; font-family: 'DM Serif Display', serif; }
+
+.reaction-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
+.reaction-card { background: var(--white); border: 2px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+.reaction-card .emoji { font-size: 1.5rem; margin-bottom: 0.3rem; }
+.reaction-card .ask { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
+.reaction-card .tells { font-size: 0.78rem; color: var(--light-navy); margin-top: 0.25rem; }
+
+.phase-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 0.75rem 0; }
+.phase-card h4 { font-family: 'DM Serif Display', serif; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.5rem; }
+.phase-card ul { padding-left: 1.25rem; font-size: 0.9rem; }
+.phase-card ul li { margin: 0.25rem 0; }
+
+.needs-list { list-style: none; padding: 0; counter-reset: needs; }
+.needs-list li { padding: 0.5rem 0 0.5rem 2.25rem; position: relative; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+.needs-list li::before { counter-increment: needs; content: counter(needs); position: absolute; left: 0; width: 1.5rem; height: 1.5rem; background: var(--navy); color: var(--bg); border-radius: 50%; text-align: center; line-height: 1.5rem; font-size: 0.75rem; font-family: 'DM Serif Display', serif; }
+
+.convo-tips { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
+.tip { background: var(--white); border-radius: 8px; padding: 0.75rem 1rem; border: 1px solid var(--border); }
+.tip .label { font-family: 'DM Serif Display', serif; font-size: 0.75rem; color: var(--cognac); text-transform: uppercase; letter-spacing: 0.04em; }
+.tip .val { font-size: 0.9rem; margin-top: 0.2rem; }
+
+.footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--light-navy); border-top: 1px solid var(--border); margin-top: 3rem; }
+
+@media (max-width: 600px) {
+  .header h1 { font-size: 1.3rem; }
+  .reaction-grid, .convo-tips { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Discovery Prompts for Mike</h1>
+  <p>Post-Research Conversation Guide &middot; Il Cervo Brunch Strategy</p>
+</div>
+
+<div class="container">
+
+<div class="how-to">
+  <strong>How to use this:</strong> Not a questionnaire. These are conversation starters organized by theme. Pick the ones that feel most relevant based on what Mike reacts to in the research. Click any prompt to see why it matters. Some will trigger 30-second answers, others might unlock 10 minutes of insight.
+</div>
+
+<h2><span class="num">1</span> Validating What We Found</h2>
+<p>Check our research against Mike's lived experience.</p>
+
+<h3>On the competitive landscape</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">We identified 15 brunch competitors. Did we miss anyone? Are there spots that locals consider top-tier that didn't show up?</div>
+    <div class="why">Locals know things Google doesn't. A place that doesn't rank well online might dominate word-of-mouth. Missing a key competitor would change our positioning analysis.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">We found zero Italian brunch in Milwaukee. Does that match your read? Has anyone tried it and failed?</div>
+    <div class="why">If someone tried Italian brunch and it failed, we need to know why. If it's never been attempted, that's a wide-open opportunity — but we need to confirm it's not because there's no demand.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Blue's Egg, Uncle Wolfie's, Cafe Benelux came up as dominant. Do you see them as your competition, or is Il Cervo going after a different crowd?</div>
+    <div class="why">If Mike sees himself competing with these spots, the strategy is "steal share." If he's after a different crowd entirely, it's "create a new category." Different playbooks.</div>
+  </div>
+</div>
+
+<h3>On the friction points</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Your Google hours still show 4PM–12AM. Has brunch been added?</div>
+    <div class="why">If this hasn't been fixed, it's the single highest-priority action. Every dollar spent on marketing is wasted if someone Googles "Il Cervo brunch" and sees "opens at 4PM."</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Sunday street parking is free in Milwaukee — no meters, no time limits. Did you know? Is the $10 pass for the hotel garage specifically?</div>
+    <div class="why">If guests can park for free on the street and you're advertising $10 parking, you're creating friction that doesn't need to exist. This could be reframed as "free street parking available" which removes a barrier entirely.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">How do people currently find out about Il Cervo? What's the most common first-visit path?</div>
+    <div class="why">Understanding the current discovery funnel tells us what's working (double down) and what's missing (fix). If it's mostly hotel guests, the local marketing strategy is different than if locals already know about it.</div>
+  </div>
+</div>
+
+<h3>On the opportunity levers</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">We found your credentials (Food &amp; Wine Best New Chef, Blackbird, Jean-Georges, WD-50) but zero press connecting you to Il Cervo. Is that intentional?</div>
+    <div class="why">This is the biggest gap between what Il Cervo HAS and what Milwaukee KNOWS. A single profile piece in OnMilwaukee or the Journal Sentinel could change awareness overnight. If there's a reason it hasn't happened, we need to know.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">The Deer District development — new concert venue, second hotel, public museum. How much of this do you see day-to-day?</div>
+    <div class="why">Press releases say the district is booming. But if foot traffic is still dead on non-game days, the development is future potential, not current reality. This changes the timeline for the strategy.</div>
+  </div>
+</div>
+
+<h2><span class="num">2</span> Filling the Data Gaps</h2>
+<p>Things we couldn't research from the outside. Mike's answers sharpen every recommendation.</p>
+
+<h3>Internal numbers</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">How many covers on drag brunch Sundays? What's the average check?</div>
+    <div class="why">This is the baseline for Sunday demand. If drag brunch fills 120 seats at $60/head, we know the ceiling. Regular brunch needs to hit a percentage of that to be viable.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">What percentage of dinner business is hotel guests vs. locals?</div>
+    <div class="why">If dinner is 80% hotel guests, brunch marketing needs to acquire an entirely new audience. If locals already come for dinner, brunch marketing is "come back Sunday morning" — much easier.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Any data from the first brunch attempt 2.5 years ago? What was tried, what happened, why did it stop?</div>
+    <div class="why">History is intelligence. If brunch failed because of the parking, that's different from failing because of awareness, menu, or staffing. The old failure mode tells us what to solve differently.</div>
+  </div>
+</div>
+
+<h3>The marketing team</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Who are they? Agency, freelancer, in-house? What's their background?</div>
+    <div class="why">An Instagram-native freelancer needs different direction than a full-service agency. The brief we build depends on their capabilities.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Do they have a brief, or were they just told "promote the restaurant"?</div>
+    <div class="why">If there's no brief, our Marketing Team Brief section in the main report becomes their Day 1 document. If they have a brief, we need to see it and compare against our research.</div>
+  </div>
+</div>
+
+<h3>Drag brunch specifics</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Do you capture email addresses from drag brunch ticket buyers?</div>
+    <div class="why">If yes: you have a warm list of people who already come to Il Cervo on Sundays. Email them about regular brunch — cheapest acquisition channel possible ($42 ROI per $1). If no: start immediately.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Have any drag brunch attendees come back for dinner? Any sense of conversion?</div>
+    <div class="why">If drag brunch attendees already convert to dinner, they'll convert to regular brunch. If they don't, drag brunch might be attracting an audience that loves the show but not the restaurant — different strategy needed.</div>
+  </div>
+</div>
+
+<h2><span class="num">3</span> Strategic Forks</h2>
+<p>Decisions Mike needs to make. Our research informs them, but they require his judgment.</p>
+
+<h3>Positioning</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Do you want to own "Italian brunch" as a category, or is this "brunch that happens to be at an Italian restaurant"?</div>
+    <div class="why">These are different positioning strategies. "Italian brunch" means bomboloni, Spritz Towers, and eggs in purgatory are the LEAD. "Brunch at an Italian place" means you lead with brunch classics and the Italian stuff is a bonus. The research says the Italian angle is the differentiator — but Mike has to want it.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">"Italian brunch, 9th floor, Food &amp; Wine Best New Chef" — does that tagline resonate, or does it feel like it's trying too hard?</div>
+    <div class="why">If it resonates, that's the positioning statement for every piece of marketing. If it feels forced, we need to find the version that's authentically Mike.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">The $45 Boozy Brunch — is that where you want to be? Milwaukee brunch ranges from $12–18 (casual) to $30–50 (upscale).</div>
+    <div class="why">$45 positions you at the top of the market. That's a legitimate choice — but it means the experience has to justify the price every single Sunday. The view and the cocktails help, but we need to know if that's intentional positioning or inherited pricing.</div>
+  </div>
+</div>
+
+<h3>Scale and timing</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">What would success look like on Sundays that would trigger adding Saturday?</div>
+    <div class="why">Having a specific trigger (e.g., "4 consecutive Sundays above 80 covers") prevents both premature expansion and missed opportunity. We want to help set that threshold based on the data.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">What's the staffing situation? Pulling dinner staff or hiring brunch-specific?</div>
+    <div class="why">Staffing affects consistency. If it's the same team doing both, burnout and quality drops are risks. If it's dedicated brunch staff, there's a cost floor that needs to be covered by brunch revenue.</div>
+  </div>
+</div>
+
+<h3>The Chicago question</h3>
+<div class="prompt-group">
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Are you "a Chicago chef bringing something new" or "your new Milwaukee chef who happens to have cooked in Chicago"?</div>
+    <div class="why">Milwaukee has its own culinary confidence now. Dan Jacobs (also Chicago-to-Milwaukee) proved the path: lead with national credentials (Top Chef), not geographic origin. Our recommendation: lead with "Food &amp; Wine Best New Chef" not "from Chicago." But it's Mike's story to tell.</div>
+  </div>
+  <div class="prompt" onclick="this.classList.toggle('open')">
+    <span class="toggle">+ why</span>
+    <div class="q">Have you connected with Milwaukee food media yet? OnMilwaukee, Journal Sentinel dining, MKEeeeEats?</div>
+    <div class="why">A single profile piece could change the awareness game overnight. If he hasn't connected yet, that's Action #1.</div>
+  </div>
+</div>
+
+<h2><span class="num">4</span> Quick-Hit Reactions</h2>
+<p>After Mike reads the main report, get his gut reactions:</p>
+
+<div class="reaction-grid">
+  <div class="reaction-card">
+    <div class="ask">What surprised you?</div>
+    <div class="tells">Tells us what he didn't know — highest-value findings</div>
+  </div>
+  <div class="reaction-card">
+    <div class="ask">What did you already know?</div>
+    <div class="tells">Tells us what's validated — high-confidence findings</div>
+  </div>
+  <div class="reaction-card">
+    <div class="ask">What do you disagree with?</div>
+    <div class="tells">Tells us where outside research misses local reality</div>
+  </div>
+  <div class="reaction-card">
+    <div class="ask">What's the one thing you want to act on first?</div>
+    <div class="tells">Tells us his priority — may differ from our ranking</div>
+  </div>
+</div>
+<div class="reaction-grid" style="grid-template-columns: 1fr;">
+  <div class="reaction-card">
+    <div class="ask">Who else should see this report?</div>
+    <div class="tells">Tells us if the GM, hotel management, or marketing team should be in the loop</div>
+  </div>
+</div>
+
+<h2><span class="num">5</span> Next Phase Planning</h2>
+
+<div class="phase-card">
+  <h4>Phase 2: Strategy &amp; Recommendations</h4>
+  <ul>
+    <li>Target audience definition (informed by Mike's answers + landscape data)</li>
+    <li>Positioning statement (requires his input on the Italian brunch fork)</li>
+    <li>Marketing brief refinement (specific to his team's capabilities)</li>
+    <li>90-day launch plan with milestones</li>
+    <li>Content strategy and asset list</li>
+  </ul>
+</div>
+
+<div class="phase-card">
+  <h4>Phase 3: Execution Support (if wanted)</h4>
+  <ul>
+    <li>Marketing team brief (one-pager they can execute against)</li>
+    <li>Press outreach plan (leveraging Sheerin's credentials)</li>
+    <li>Social media content calendar</li>
+    <li>Email capture and campaign strategy</li>
+    <li>Event strategy (beyond drag brunch)</li>
+  </ul>
+</div>
+
+<h3>What we need from Mike to proceed</h3>
+<ul class="needs-list">
+  <li>Answers to the data gap questions (Section 2)</li>
+  <li>His calls on the strategic forks (Section 3)</li>
+  <li>Whether he wants Phase 2 as another research report or a working session</li>
+  <li>Whether the marketing team should be included in Phase 2</li>
+</ul>
+
+<h2 style="border-bottom-color: var(--navy);">How to Have This Conversation</h2>
+
+<div class="convo-tips">
+  <div class="tip"><div class="label">Setting</div><div class="val">In person or on a call. Not via text.</div></div>
+  <div class="tip"><div class="label">Time</div><div class="val">30–45 minutes for core questions</div></div>
+  <div class="tip"><div class="label">Who</div><div class="val">Sean + Mike minimum. GM optional.</div></div>
+  <div class="tip"><div class="label">Record?</div><div class="val">If comfortable — casual detail is richer than written answers</div></div>
+</div>
+
+<p style="margin-top:1rem;">After the conversation, we feed Mike's answers back into the engine, update the research, and produce Phase 2 deliverables.</p>
+
+</div>
+
+<div class="footer">
+  Il Cervo Brunch Strategy &middot; Discovery Guide &middot; March 2026
+</div>
+
+</body>
+</html>

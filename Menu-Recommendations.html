@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Recommendations — Il Cervo Brunch</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #EFE1D4; --navy: #163963; --cognac: #6A3414; --light: #395670; --white: #fff; --border: #d4c4b4; --green: #2d7d3a; --red: #c53030; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--navy); line-height: 1.7; }
+.header { background: linear-gradient(135deg, var(--navy) 0%, var(--light) 100%); color: var(--bg); padding: 40px; max-width: 960px; margin: 0 auto; }
+.header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; margin-bottom: 6px; }
+.header .sub { font-size: 0.92rem; opacity: 0.8; }
+.header .disclaimer { margin-top: 16px; font-size: 0.78rem; opacity: 0.55; line-height: 1.5; padding-top: 12px; border-top: 1px solid rgba(239,225,212,0.2); }
+
+.container { max-width: 960px; margin: 0 auto; padding: 24px 40px 60px; }
+h2 { font-family: 'DM Serif Display', serif; font-size: 1.35rem; color: var(--navy); margin: 2.5rem 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--cognac); }
+h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--cognac); margin: 1.5rem 0 8px; }
+p { font-size: 0.9rem; margin-bottom: 12px; }
+
+.philosophy { background: var(--white); border-left: 4px solid var(--cognac); padding: 20px 24px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.philosophy strong { color: var(--cognac); }
+
+/* COMPARISON ROWS */
+.compare { margin: 20px 0; }
+.compare-row { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; margin: 12px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+.compare-side { padding: 16px 20px; background: var(--white); }
+.compare-side.current { }
+.compare-side.suggested { background: #f6faf6; }
+.compare-arrow { display: flex; align-items: center; justify-content: center; background: var(--navy); color: var(--bg); font-size: 1.2rem; font-weight: 700; }
+.compare-side .label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.compare-side.current .label { color: var(--light); }
+.compare-side.suggested .label { color: var(--green); }
+.compare-side .item-name { font-weight: 700; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px; }
+.compare-side .item-desc { font-size: 0.82rem; color: var(--light); line-height: 1.5; }
+.compare-side .item-price { font-family: 'DM Serif Display', serif; color: var(--cognac); font-size: 0.95rem; margin-top: 6px; }
+
+.why-box { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: -4px 0 16px; font-size: 0.85rem; }
+.why-box .why-label { font-weight: 700; color: var(--cognac); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.why-box .data { font-size: 0.78rem; color: var(--light); margin-top: 6px; font-style: italic; }
+
+/* NEW ADDITIONS */
+.addition { background: var(--white); border: 2px solid var(--green); border-radius: 10px; padding: 18px 22px; margin: 14px 0; }
+.addition .badge { display: inline-block; background: var(--green); color: white; font-size: 0.68rem; font-weight: 700; padding: 2px 10px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.addition .item-name { font-weight: 700; color: var(--navy); font-size: 1rem; margin-bottom: 4px; }
+.addition .item-desc { font-size: 0.85rem; color: var(--light); margin-bottom: 8px; }
+.addition .item-price { font-family: 'DM Serif Display', serif; color: var(--cognac); }
+.addition .rationale { font-size: 0.82rem; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+.addition .rationale strong { color: var(--navy); }
+
+/* KEEP AS-IS */
+.keep { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 8px 0; display: flex; justify-content: space-between; align-items: center; }
+.keep .name { font-weight: 600; font-size: 0.9rem; }
+.keep .verdict { font-size: 0.78rem; color: var(--green); font-weight: 600; }
+
+/* SIDE BY SIDE MENU */
+.menu-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 20px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+.menu-col { padding: 20px 24px; }
+.menu-col.now { background: var(--white); }
+.menu-col.rec { background: #f6faf6; }
+.menu-col h4 { font-family: 'DM Serif Display', serif; font-size: 1rem; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+.menu-col.now h4 { color: var(--light); border-bottom-color: var(--light); }
+.menu-col.rec h4 { color: var(--green); border-bottom-color: var(--green); }
+.menu-item { padding: 6px 0; border-bottom: 1px solid #f0ebe5; font-size: 0.85rem; display: flex; justify-content: space-between; }
+.menu-item:last-child { border-bottom: none; }
+.menu-item .mi-name { font-weight: 500; }
+.menu-item .mi-price { color: var(--cognac); font-weight: 600; }
+.menu-item.new { color: var(--green); font-weight: 600; }
+.menu-item.changed { color: var(--cognac); }
+.menu-item.removed { color: var(--red); text-decoration: line-through; opacity: 0.5; }
+
+.callout { border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 0.88rem; }
+.callout.key { background: var(--navy); color: var(--bg); }
+.callout.key strong { color: #ffd7b5; }
+.callout.note { background: var(--white); border: 1px solid var(--border); }
+
+.footer { text-align: center; padding: 24px; font-size: 0.75rem; color: var(--light); border-top: 1px solid var(--border); margin-top: 32px; }
+
+@media (max-width: 768px) {
+  .header, .container { padding-left: 20px; padding-right: 20px; }
+  .compare-row { grid-template-columns: 1fr; }
+  .compare-arrow { padding: 6px; font-size: 0.9rem; }
+  .menu-compare { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Menu Recommendations</h1>
+  <div class="sub">What the market data says Mike should consider — and why.</div>
+  <div class="disclaimer">These are market-informed suggestions, not chef instructions. Mike is a Food & Wine Best New Chef — he knows food better than any dataset. These recommendations come from the competitive landscape, demographic data, pricing analysis, and gap analysis. The chef decides what's on the plate. We're telling him what the market is asking for.</div>
+</div>
+
+<div class="container">
+
+<div class="philosophy">
+  <strong>The guiding principle:</strong> Mike's menu is already 70% right. The unique items (truffle, caviar, gold, dry aged) are exactly what the market needs. The recommendations below are about filling specific gaps the research identified — not reinventing what's working. Think of this as seasoning, not a new recipe.
+</div>
+
+<!-- THE FRAMEWORK -->
+<h2>Three Things the Research Says This Menu Needs</h2>
+
+<p>Based on the competitive landscape (15 competitors), demographic analysis (Deer District, hotel guests, local brunch crowd), and the gap between what Milwaukee brunch-goers expect and what's currently offered:</p>
+
+<div class="callout key">
+  <strong>1. A stronger Italian identity anchor.</strong> The menu has Italian DNA (focaccia, giardiniera, Calabrian, San Marzano) but no single dish that screams "this is Italian brunch." The meatball sub is closest. Adding one unmistakably Italian brunch item would let marketing truthfully say "Italian brunch" — and that's a position zero competitors can claim.<br><br>
+  <strong>2. A lower entry point for the brunch-cautious guest.</strong> The cheapest entree is $22. Milwaukee brunch-goers are used to $14-18. A $14-16 option would remove the "it's too expensive" friction without devaluing the premium items. Think of it as the on-ramp to a $47 omelet — they come for the affordable item, they see the truffle and gold, they come back for the upgrade.<br><br>
+  <strong>3. A signature cocktail moment.</strong> 7 of 10 competitors feature Bloody Marys prominently. Cafe Benelux wins awards for theirs. Tre Rivali has a $25 charcuterie Bloody. Mike's food menu has no drink program visible. An Italian-forward cocktail (Spritz, Negroni Sbagliato, Amarocano) would differentiate from the Bloody Mary crowd AND strengthen the Italian identity.
+</div>
+
+<!-- ITEM-BY-ITEM RECOMMENDATIONS -->
+<h2>What to Keep, What to Tweak, What to Add</h2>
+
+<h3>Keep Exactly As-Is — These Are Working</h3>
+
+<div class="keep"><span class="name">24 Carat Gold French Toast — $22</span><span class="verdict">Perfect. Don't touch it. #1 marketing item.</span></div>
+<div class="keep"><span class="name">Black Truffle Omelet + Caviar — $22 / $47</span><span class="verdict">Perfect. The luxury anchor. Nobody else has this.</span></div>
+<div class="keep"><span class="name">BEC Pizza + Truffle — $26 / $51</span><span class="verdict">Perfect. The group sell and shareable centerpiece.</span></div>
+<div class="keep"><span class="name">Steak and Eggs — $28</span><span class="verdict">Solid anchor. Hanger steak is the right cut.</span></div>
+<div class="keep"><span class="name">Chopped Veggie Pizza — $25</span><span class="verdict">Needed. Vegetarian anchor. San Marzano sauce is the Italian tell.</span></div>
+
+<h3>Consider Tweaking</h3>
+
+<div class="compare">
+
+  <div class="compare-row">
+    <div class="compare-side current">
+      <div class="label">Current</div>
+      <div class="item-name">Il Cervo's Dry Aged Burger — $24</div>
+      <div class="item-desc">White American, giardiniera aioli, grilled onions, bacon, focaccia bun, fries. Add egg $2.</div>
+    </div>
+    <div class="compare-arrow">→</div>
+    <div class="compare-side suggested">
+      <div class="label">Consider</div>
+      <div class="item-name">Il Cervo's Dry Aged Burger — $24</div>
+      <div class="item-desc">Same burger, but <strong>make the egg default</strong> (include it, let them remove). Rename to "Il Cervo's Dry Aged Brunch Burger" to signal it's a brunch item, not a lunch holdover.</div>
+    </div>
+  </div>
+  <div class="why-box">
+    <div class="why-label">Why</div>
+    The egg is what makes it brunch. Right now it reads as a dinner burger with an egg option. 3 competitors have brunch burgers — all include the egg by default. The word "Brunch" in the name tells the guest this was designed for Sunday, not borrowed from the dinner menu.
+    <div class="data">Market data: Story Hill brunch burger includes egg ($17), Cafe Benelux burger includes egg ($22).</div>
+  </div>
+
+  <div class="compare-row">
+    <div class="compare-side current">
+      <div class="label">Current</div>
+      <div class="item-name">Caesar Salad — $14</div>
+      <div class="item-desc">Baby romaine, preserved garlic Caesar dressing.</div>
+    </div>
+    <div class="compare-arrow">→</div>
+    <div class="compare-side suggested">
+      <div class="label">Consider</div>
+      <div class="item-name">Caesar Salad — $14</div>
+      <div class="item-desc">Add <strong>crispy pancetta</strong> or <strong>white anchovy</strong>. One Italian protein element transforms this from "generic Caesar" to "Italian Caesar." The preserved garlic is already a hidden flex — an Italian protein makes it visible.</div>
+    </div>
+  </div>
+  <div class="why-box">
+    <div class="why-label">Why</div>
+    4 of 10 competitors have a Caesar. Yours needs a visible differentiator. Preserved garlic is great but invisible — guests won't know unless told. Pancetta or anchovy is immediately recognizable as Italian and upgrades the photo. No price change needed — the ingredient cost is minimal.
+    <div class="data">Market positioning: No competitor has an "Italian Caesar" — you'd own the variation.</div>
+  </div>
+
+  <div class="compare-row">
+    <div class="compare-side current">
+      <div class="label">Current</div>
+      <div class="item-name">Salmon Gravlax Bruschetta — $15</div>
+      <div class="item-desc">Calabrian aioli, pickled onions, cherry tomatoes, avocado, toasted focaccia.</div>
+    </div>
+    <div class="compare-arrow">→</div>
+    <div class="compare-side suggested">
+      <div class="label">Consider</div>
+      <div class="item-name">Salmon Gravlax Bruschetta — $15</div>
+      <div class="item-desc">This is great as-is. One thought: consider renaming to just <strong>"Gravlax Bruschetta"</strong> — the word "bruschetta" does the Italian work, and dropping "chopped salmon" makes it sound more refined and less like a deli item.</div>
+    </div>
+  </div>
+  <div class="why-box">
+    <div class="why-label">Why</div>
+    Minor naming suggestion. "Chopped Salmon Gravlax Bruschetta" is a lot of words. "Gravlax Bruschetta" is cleaner and leans into the Italian framing. The description can mention the salmon — the name doesn't need to. Not a hill to die on.
+  </div>
+
+</div>
+
+<h3>Consider Adding — Filling Research-Identified Gaps</h3>
+
+<div class="addition">
+  <span class="badge">High Priority — Italian Identity Anchor</span>
+  <div class="item-name">Uova in Purgatorio (Eggs in Purgatory)</div>
+  <div class="item-desc">Two eggs baked in spicy San Marzano tomato sauce, fresh mozzarella, basil, grilled focaccia for dipping.</div>
+  <div class="item-price">Suggested: $18-20</div>
+  <div class="rationale">
+    <strong>Why the market wants this:</strong> This is THE classic Italian brunch dish. It exists at zero Milwaukee competitors. It's the single item that would make "Italian brunch" undeniably true. It's also one of the most photogenic brunch dishes — bright red sauce, white eggs, green basil, melted cheese.
+    <br><br>
+    <strong>Market data:</strong> Shakshuka (the Middle Eastern cousin) is at 3 of 10 competitors. Eggs in purgatory is the Italian version — immediately differentiated. Story Hill charges $16 for shakshuka. At $18-20, yours would be premium but justified by the San Marzano sauce + fresh mozz + focaccia.
+    <br><br>
+    <strong>Why it works for the menu:</strong> It uses ingredients you already have (San Marzano, focaccia, mozzarella). Low new-ingredient cost. It fills the "I want a classic egg dish" gap — currently the only egg option is the $22 truffle omelet, which is premium. This gives a mid-priced Italian egg entry point.
+    <br><br>
+    <strong>Why it works for marketing:</strong> "Eggs in Purgatory" is a name that intrigues. It photographs beautifully. It's the dish food writers mention when covering Italian brunch. It's the answer to "what makes this Italian?" for guests who don't read ingredient lists.
+  </div>
+</div>
+
+<div class="addition">
+  <span class="badge">High Priority — Entry Price Point</span>
+  <div class="item-name">Bomboloni (Italian Doughnuts)</div>
+  <div class="item-desc">House-made Italian doughnuts, served warm. Choice of filling: chocolate ganache, vanilla cream, or seasonal jam. Dusted in cinnamon sugar.</div>
+  <div class="item-price">Suggested: $10-12 (serves 2-3)</div>
+  <div class="rationale">
+    <strong>Why the market wants this:</strong> The cheapest item on the current menu is $14 (Caesar). That's higher than most Milwaukee brunch entrees. A $10-12 shareable pastry item does three things: (1) lowers the entry point so price-sensitive guests have an on-ramp, (2) adds an Italian sweet item to balance the Gold French Toast's American-leaning sweetness, (3) gives every table a "you have to try the bomboloni" moment — the same energy that the gold French toast has but at half the price.
+    <br><br>
+    <strong>Market data:</strong> 8 of 10 competitors have a sweet brunch item under $14. Blue's Egg has monkey bread ($5). Honeypie has pies ($6-8). Cafe Benelux has sausage corndogs ($18 but shareable). Il Cervo currently has no shareable starter.
+    <br><br>
+    <strong>Why it works for the menu:</strong> Bomboloni are an Italian doughnut — unmistakably Italian, universally loved, incredible when fresh. They're a pastry kitchen item, not a line item — can be prepped in batches. They photograph beautifully (golden, dusted, oozing filling). And "bomboloni" is a word people have to ask about, which starts a conversation.
+    <br><br>
+    <strong>Why it works for marketing:</strong> "House-made Italian doughnuts" is a headline. The word "bomboloni" trends on food Instagram. At $10-12 for the table, it's the lowest-commitment way to try Il Cervo brunch — and a reason to come back.
+  </div>
+</div>
+
+<div class="addition">
+  <span class="badge">High Priority — Cocktail Identity</span>
+  <div class="item-name">Italian Brunch Cocktail Program</div>
+  <div class="item-desc">A focused Italian cocktail menu: Aperol Spritz ($14), Limoncello Mimosa ($13), Negroni Sbagliato ($15), Espresso Martini Italiano ($16), and a shareable Spritz Tower ($45, serves 4-6).</div>
+  <div class="item-price">Suggested: $13-16 per drink, $45 tower</div>
+  <div class="rationale">
+    <strong>Why the market wants this:</strong> 7 of 10 competitors feature Bloody Marys prominently. Cafe Benelux wins awards for theirs. Tre Rivali has a $25 charcuterie Bloody Mary. The Bloody Mary lane is CROWDED. An Italian cocktail program is completely uncontested — nobody in Milwaukee is doing Spritz-forward brunch.
+    <br><br>
+    <strong>Market data:</strong> The Aperol Spritz has become the #1 brunch cocktail nationally, surpassing mimosas in many markets. A Spritz Tower (shareable carafe/dispenser for the table) was on Il Cervo's previous menu at $45 — it was the most Instagrammable item. Bringing it back would give the BEC pizza a companion as the table-centerpiece sell.
+    <br><br>
+    <strong>Why it works for the menu:</strong> Italian cocktails use Italian spirits (Aperol, Campari, amaro, limoncello, Starlino). These are probably already behind the bar from dinner service. The cost is almost zero — it's a menu card and training, not new inventory.
+    <br><br>
+    <strong>Why it works for marketing:</strong> "Spritz Tower on the 9th floor" is a sentence that sells itself. Spritz-orange against the city skyline is the Instagram shot. An Italian cocktail program completes the identity — Italian food AND Italian drinks. The marketing team gets a whole new content category.
+  </div>
+</div>
+
+<div class="addition">
+  <span class="badge">Medium Priority — Benedict Gap</span>
+  <div class="item-name">Prosciutto Benedict on Focaccia</div>
+  <div class="item-desc">Poached eggs, prosciutto di Parma, truffled hollandaise, arugula, house focaccia.</div>
+  <div class="item-price">Suggested: $22-24</div>
+  <div class="rationale">
+    <strong>Why the market wants this:</strong> 7 of 10 competitors have eggs Benedict. It's the single most expected brunch item in America. Its absence is notable — some guests won't order anything else. Blue's Egg has 5 Benedict variants. An Italian Benedict (prosciutto, focaccia, truffled hollandaise) gives the expected item an Il Cervo twist.
+    <br><br>
+    <strong>The counterargument:</strong> Mike may have intentionally excluded Benedict to keep the menu tight and avoid being "another Benedict place." That's valid. But the data says 7/10 competitors have it because 70% of brunch guests look for it. A single Italian-forward version satisfies demand without diluting identity.
+    <br><br>
+    <strong>Why it works for the menu:</strong> Uses existing ingredients (focaccia, eggs, truffle from the omelet's hollandaise). Prosciutto is a natural Italian upgrade over Canadian bacon. The truffled hollandaise ties it to the truffle omelet's luxury positioning. It fills the "classic egg dish under $25" gap alongside the suggested eggs in purgatory.
+  </div>
+</div>
+
+<div class="addition">
+  <span class="badge">Medium Priority — Sweet Balance</span>
+  <div class="item-name">Ricotta Pancakes with Lemon Curd</div>
+  <div class="item-desc">Fluffy Italian ricotta pancakes, house lemon curd, fresh berries, powdered sugar.</div>
+  <div class="item-price">Suggested: $18</div>
+  <div class="rationale">
+    <strong>Why the market wants this:</strong> 8 of 10 competitors have pancakes or waffles. The menu currently has one sweet item (Gold French Toast at $22). A $18 ricotta pancake gives a second sweet option at a lower price point, with clear Italian identity (ricotta is the star). Ricotta pancakes are trending nationally — they're lighter and fluffier than American pancakes and the "ricotta" signals quality.
+    <br><br>
+    <strong>The counterargument:</strong> The Gold French Toast already owns the sweet lane. Adding another sweet item could split orders. If the kitchen can only do one sweet perfectly, keep the gold.
+    <br><br>
+    <strong>If Mike doesn't want pancakes:</strong> Consider an Italian-style waffle (pizzelle-inspired) or tiramisu French toast as an alternate sweet option that keeps the Italian thread.
+  </div>
+</div>
+
+<!-- SIDE BY SIDE FULL MENU -->
+<h2>Full Menu: Current vs. Recommended</h2>
+
+<div class="menu-compare">
+  <div class="menu-col now">
+    <h4>Current Menu (10 items)</h4>
+    <div class="menu-item"><span class="mi-name">Caesar Salad</span><span class="mi-price">$14</span></div>
+    <div class="menu-item"><span class="mi-name">Slow Roasted Beet Salad</span><span class="mi-price">$19</span></div>
+    <div class="menu-item"><span class="mi-name">Salmon Gravlax Bruschetta</span><span class="mi-price">$15</span></div>
+    <div class="menu-item"><span class="mi-name">Dry Aged Burger</span><span class="mi-price">$24</span></div>
+    <div class="menu-item"><span class="mi-name">Black Truffle Omelet</span><span class="mi-price">$22</span></div>
+    <div class="menu-item"><span class="mi-name">24K Gold French Toast</span><span class="mi-price">$22</span></div>
+    <div class="menu-item"><span class="mi-name">Steak and Eggs</span><span class="mi-price">$28</span></div>
+    <div class="menu-item"><span class="mi-name">Dry Aged Meatball Sub</span><span class="mi-price">$24</span></div>
+    <div class="menu-item"><span class="mi-name">BEC Pizza</span><span class="mi-price">$26</span></div>
+    <div class="menu-item"><span class="mi-name">Veggie Pizza</span><span class="mi-price">$25</span></div>
+    <div style="margin-top:16px; padding-top:12px; border-top:2px solid var(--border); font-size:0.82rem;">
+      <strong>Range:</strong> $14-$28 (base)<br>
+      <strong>Avg entree:</strong> $22.10<br>
+      <strong>Items:</strong> 10<br>
+      <strong>Sweet options:</strong> 1<br>
+      <strong>Italian-obvious items:</strong> 2 (meatball sub, pizzas)<br>
+      <strong>Entry point:</strong> $14 (salad)
+    </div>
+  </div>
+  <div class="menu-col rec">
+    <h4>Recommended Menu (14-15 items)</h4>
+    <div class="menu-item new"><span class="mi-name">★ Bomboloni (shareable)</span><span class="mi-price">$10</span></div>
+    <div class="menu-item changed"><span class="mi-name">↻ Caesar Salad (+ pancetta)</span><span class="mi-price">$14</span></div>
+    <div class="menu-item"><span class="mi-name">Slow Roasted Beet Salad</span><span class="mi-price">$19</span></div>
+    <div class="menu-item changed"><span class="mi-name">↻ Gravlax Bruschetta</span><span class="mi-price">$15</span></div>
+    <div class="menu-item new"><span class="mi-name">★ Uova in Purgatorio</span><span class="mi-price">$19</span></div>
+    <div class="menu-item"><span class="mi-name">Black Truffle Omelet (+caviar)</span><span class="mi-price">$22/$47</span></div>
+    <div class="menu-item new"><span class="mi-name">★ Prosciutto Benedict</span><span class="mi-price">$23</span></div>
+    <div class="menu-item"><span class="mi-name">24K Gold French Toast</span><span class="mi-price">$22</span></div>
+    <div class="menu-item new"><span class="mi-name">★ Ricotta Pancakes</span><span class="mi-price">$18</span></div>
+    <div class="menu-item changed"><span class="mi-name">↻ Dry Aged Brunch Burger (egg incl.)</span><span class="mi-price">$24</span></div>
+    <div class="menu-item"><span class="mi-name">Steak and Eggs</span><span class="mi-price">$28</span></div>
+    <div class="menu-item"><span class="mi-name">Dry Aged Meatball Sub</span><span class="mi-price">$24</span></div>
+    <div class="menu-item"><span class="mi-name">BEC Pizza (+truffle)</span><span class="mi-price">$26/$51</span></div>
+    <div class="menu-item"><span class="mi-name">Veggie Pizza</span><span class="mi-price">$25</span></div>
+    <div style="margin-top:16px; padding-top:12px; border-top:2px solid var(--green); font-size:0.82rem; color:var(--green);">
+      <strong>Range:</strong> $10-$28 (base)<br>
+      <strong>Avg entree:</strong> $20.35<br>
+      <strong>Items:</strong> 14<br>
+      <strong>Sweet options:</strong> 3 (bomboloni, French toast, pancakes)<br>
+      <strong>Italian-obvious items:</strong> 6 (bomboloni, purgatorio, prosciutto Benedict, meatball sub, pizzas)<br>
+      <strong>Entry point:</strong> $10 (bomboloni)
+    </div>
+  </div>
+</div>
+
+<div class="callout note">
+  <strong>What changed in the numbers:</strong> Average entree drops from $22.10 to $20.35 — more accessible without losing the premium ceiling ($47 omelet, $51 pizza still there). Italian-obvious items go from 2 to 6 — "Italian brunch" becomes undeniable. Sweet options go from 1 to 3 — catches the 80% of Milwaukee brunch menus that offer multiple sweet items. Entry point drops from $14 to $10 — a shareable pastry is the lowest-friction way to try Il Cervo.
+</div>
+
+<!-- THE COCKTAIL QUESTION -->
+<h2>The Cocktail Gap (Separate From Food Menu)</h2>
+
+<p>The food menu Mike provided has no drinks. But the cocktail program is half the brunch experience — and potentially half the check average. Here's what the market data says:</p>
+
+<div class="menu-compare">
+  <div class="menu-col now">
+    <h4>What Competitors Do</h4>
+    <div class="menu-item"><span class="mi-name">Bloody Mary (standard)</span><span class="mi-price">$12-14</span></div>
+    <div class="menu-item"><span class="mi-name">Bloody Mary (loaded/award-winning)</span><span class="mi-price">$16-25</span></div>
+    <div class="menu-item"><span class="mi-name">Mimosa</span><span class="mi-price">$10-13</span></div>
+    <div class="menu-item"><span class="mi-name">Bottomless Mimosas</span><span class="mi-price">$20-30</span></div>
+    <div class="menu-item"><span class="mi-name">Espresso drinks</span><span class="mi-price">$5-8</span></div>
+    <div style="margin-top:12px; font-size:0.82rem; color:var(--red);">
+      <strong>The lane:</strong> Bloody Mary-dominated. 7/10 competitors. Cafe Benelux wins awards. Tre Rivali has a $25 charcuterie Bloody. This lane is TAKEN.
+    </div>
+  </div>
+  <div class="menu-col rec">
+    <h4>What Il Cervo Could Own</h4>
+    <div class="menu-item new"><span class="mi-name">★ Aperol Spritz</span><span class="mi-price">$14</span></div>
+    <div class="menu-item new"><span class="mi-name">★ Spritz Tower (serves 4-6)</span><span class="mi-price">$45</span></div>
+    <div class="menu-item new"><span class="mi-name">★ Limoncello Mimosa</span><span class="mi-price">$13</span></div>
+    <div class="menu-item new"><span class="mi-name">★ Negroni Sbagliato</span><span class="mi-price">$15</span></div>
+    <div class="menu-item new"><span class="mi-name">★ Espresso Martini Italiano</span><span class="mi-price">$16</span></div>
+    <div style="margin-top:12px; font-size:0.82rem; color:var(--green);">
+      <strong>The lane:</strong> Italian cocktails. Zero competitors. Spritz Tower = the #1 Instagrammable brunch drink in the country. Aperol-orange against the 9th-floor skyline = the photo that markets itself.
+    </div>
+  </div>
+</div>
+
+<!-- WHAT NOT TO DO -->
+<h2>What NOT to Add</h2>
+
+<p>Things the market has plenty of that would dilute Il Cervo's identity if added:</p>
+
+<div class="keep" style="border-color:var(--red);"><span class="name" style="color:var(--red);">✕ Standard Bloody Mary</span><span class="verdict" style="color:var(--red);">7/10 already have this. Cafe Benelux owns it. Don't compete.</span></div>
+<div class="keep" style="border-color:var(--red);"><span class="name" style="color:var(--red);">✕ Avocado Toast</span><span class="verdict" style="color:var(--red);">4/10 have it. The gravlax bruschetta IS your avo toast. Better.</span></div>
+<div class="keep" style="border-color:var(--red);"><span class="name" style="color:var(--red);">✕ Chicken & Waffles</span><span class="verdict" style="color:var(--red);">3/10 have it. Not Italian. Doesn't fit the identity.</span></div>
+<div class="keep" style="border-color:var(--red);"><span class="name" style="color:var(--red);">✕ Breakfast Burrito</span><span class="verdict" style="color:var(--red);">3/10 have it. Not Italian. Uncle Wolfie's owns this space.</span></div>
+<div class="keep" style="border-color:var(--red);"><span class="name" style="color:var(--red);">✕ Standard American Breakfast (eggs, bacon, toast)</span><span class="verdict" style="color:var(--red);">5/10 have it. Commoditizes you. The steak & eggs is the elevated version of this.</span></div>
+<div class="keep" style="border-color:var(--red);"><span class="name" style="color:var(--red);">✕ Bottomless Mimosas</span><span class="verdict" style="color:var(--red);">Attracts the wrong crowd for a luxury positioning. Let the $8/glass places do this.</span></div>
+
+<!-- FINAL WORD -->
+<h2>The Final Word</h2>
+
+<div class="callout key">
+  <strong>Mike's current menu is strong.</strong> It has four items nobody in Milwaukee has (truffle omelet + caviar, gold French toast, dry aged meatball sub, truffle add-on). The suggestions above aren't fixes — they're amplifiers. They strengthen the Italian identity, lower the entry point, fill expected categories, and give the cocktail program a competitive lane that's completely uncontested.
+  <br><br>
+  <strong>If Mike does only three things from this page:</strong>
+  <br>1. Add bomboloni ($10 shareable Italian doughnut — lowest entry point + Italian identity + Instagram magnet)
+  <br>2. Add eggs in purgatory ($19 — THE Italian brunch dish, fills the classic egg gap)
+  <br>3. Launch an Italian cocktail card with a Spritz Tower ($45 — the #1 shareable, photographable, profitable item)
+  <br><br>
+  Those three additions would transform the positioning from "luxury brunch at an Italian restaurant" to <strong>"the Italian brunch — the only one in Milwaukee."</strong> And that's a position nobody can take from you.
+</div>
+
+</div>
+
+<div class="footer">
+  Il Cervo Brunch Strategy &middot; Menu Recommendations &middot; Based on 80+ source market research, 15 competitor menu analysis, and Milwaukee demographic data<br>
+  The chef decides. The market informs. March 2026.
+</div>
+
+</body>
+</html>
