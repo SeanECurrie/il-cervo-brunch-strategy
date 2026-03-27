@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Cervo — FOH Pocket Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EFE1D4;
+  --navy: #163963;
+  --cognac: #6A3414;
+  --light-navy: #395670;
+  --white: #FDFAF6;
+  --off-white: #F7F0E8;
+  --border: #D4C4B0;
+  --text: #2D2A26;
+  --text-light: #5A554E;
+  --green: #2d7d3a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 0 0 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Draft banner */
+.draft-banner {
+  background: #c53030;
+  color: white;
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--light-navy) 100%);
+  color: var(--white);
+  padding: 24px 20px 20px;
+  text-align: center;
+}
+.header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 4px;
+}
+.header .sub {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+
+/* Sections */
+.section {
+  padding: 18px 20px 14px;
+}
+.section + .section {
+  border-top: 2px solid var(--border);
+}
+.section-label {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--cognac);
+}
+
+/* 3 Things badges */
+.thing-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.thing-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+.thing-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+}
+.thing-text {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+/* Dish cards */
+.dish-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dish {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--cognac);
+}
+.dish-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.dish-name {
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: var(--navy);
+}
+.dish-price {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--cognac);
+  white-space: nowrap;
+}
+.dish-line {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.45;
+}
+.dish-line strong {
+  color: var(--cognac);
+  font-weight: 700;
+}
+
+/* Parking callout */
+.parking-box {
+  background: #eef7ef;
+  border: 2px solid var(--green);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.parking-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+.parking-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--green);
+  line-height: 1.4;
+}
+.parking-text span {
+  display: block;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* Script cards */
+.script-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.script {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.script-when {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+  margin-bottom: 5px;
+}
+.script-say {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--off-white);
+  font-style: italic;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 16px 20px 0;
+  font-size: 0.68rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+/* Print styles */
+@media print {
+  @page {
+    size: 4in 9in;
+    margin: 0;
+  }
+  .draft-banner { display: none; }
+  body {
+    max-width: none;
+    background: white;
+    padding: 0;
+    font-size: 11px;
+  }
+  .header { padding: 16px 14px 12px; }
+  .header h1 { font-size: 1.3rem; }
+  .section { padding: 12px 14px 10px; }
+  .section-label { font-size: 0.95rem; margin-bottom: 8px; }
+  .thing-list li { padding: 8px 10px; }
+  .thing-icon { font-size: 1.2rem; width: 28px; }
+  .thing-text { font-size: 0.82rem; }
+  .dish { padding: 10px 12px; }
+  .dish-name { font-size: 0.82rem; }
+  .dish-line { font-size: 0.75rem; }
+  .script { padding: 10px 12px; }
+  .script-say { font-size: 0.78rem; }
+  .parking-box { padding: 10px 12px; }
+  .footer { font-size: 0.6rem; }
+}
+
+@media (min-width: 461px) {
+  body { margin-top: 20px; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(22,57,99,0.12); }
+}
+</style>
+</head>
+<body>
+
+<div class="draft-banner">&#9888; Draft Scenario &mdash; Not Yet Adopted by Il Cervo &mdash; For Preview Purposes Only</div>
+
+<div class="header">
+  <h1>FOH Pocket Card</h1>
+  <div class="sub">Il Cervo &middot; Sunday Brunch</div>
+</div>
+
+<!-- Section 1: The 3 Things -->
+<div class="section">
+  <div class="section-label">The 3 Things Every Guest Should Hear</div>
+  <ul class="thing-list">
+    <li>
+      <div class="thing-icon">&#x1F1EE;&#x1F1F9;</div>
+      <div class="thing-text">Only Italian brunch in Milwaukee</div>
+    </li>
+    <li>
+      <div class="thing-icon">&#x1F3D9;&#xFE0F;</div>
+      <div class="thing-text">9th floor &mdash; best view in the city</div>
+    </li>
+    <li>
+      <div class="thing-icon">&#x1F3C6;</div>
+      <div class="thing-text">Chef Mike: Food &amp; Wine Best New Chef</div>
+    </li>
+  </ul>
+</div>
+
+<!-- Section 2: Push These 3 Dishes -->
+<div class="section">
+  <div class="section-label">Push These 3 Dishes</div>
+  <div class="dish-stack">
+    <div class="dish">
+      <div class="dish-top">
+        <div class="dish-name">24 Carat Gold French Toast</div>
+        <div class="dish-price">$22</div>
+      </div>
+      <div class="dish-line"><strong>Say:</strong> "Gold-dusted, torched meringue, banana rum toffee. The Instagram dish."</div>
+    </div>
+    <div class="dish">
+      <div class="dish-top">
+        <div class="dish-name">Black Truffle Omelet</div>
+        <div class="dish-price">$22 &middot; +caviar $25</div>
+      </div>
+      <div class="dish-line"><strong>Say:</strong> "Truffle + whipped ricotta. Upsell the caviar &mdash; nobody else does this."</div>
+    </div>
+    <div class="dish">
+      <div class="dish-top">
+        <div class="dish-name">Bacon Egg &amp; Cheese Pizza</div>
+        <div class="dish-price">$26</div>
+      </div>
+      <div class="dish-line"><strong>Say:</strong> "Great for sharing. The table centerpiece for groups."</div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 3: Parking -->
+<div class="section">
+  <div class="section-label">Parking</div>
+  <div class="parking-box">
+    <div class="parking-icon">&#x1F17F;&#xFE0F;</div>
+    <div class="parking-text">
+      Sunday street parking is FREE.
+      <span>Hotel garage = $10 validation</span>
+    </div>
+  </div>
+</div>
+
+<!-- Section 4: Your 3 Lines -->
+<div class="section">
+  <div class="section-label">Your 3 Lines</div>
+  <div class="script-stack">
+    <div class="script">
+      <div class="script-when">&#x1F44B; Sit Down</div>
+      <div class="script-say">"Welcome to Il Cervo &mdash; 9th floor, best brunch view in Milwaukee. Can I tell you about a few things you can't get anywhere else?"</div>
+    </div>
+    <div class="script">
+      <div class="script-when">&#x1F4CB; Ordering</div>
+      <div class="script-say">"The gold French toast is our signature &mdash; and if you want to go big, the truffle omelet with caviar is incredible."</div>
+    </div>
+    <div class="script">
+      <div class="script-when">&#x1F44B; Leaving</div>
+      <div class="script-say">"So glad you came up &mdash; we're here every Sunday. A quick Google review helps people find us!"</div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  Full training guide: ask your shift lead &middot; Il Cervo Sunday Brunch &middot; DRAFT
+</div>
+
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Cervo — Sunday Brunch Shift Lead Training Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #EFE1D4; --navy: #163963; --cognac: #6A3414; --light: #395670; --white: #FDFAF6; --border: #D4C4B0; --green: #2d7d3a; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--navy); line-height: 1.6; max-width: 800px; margin: 0 auto; }
+
+.draft-banner { background: #c53030; color: white; text-align: center; padding: 6px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.cover { background: linear-gradient(135deg, var(--navy) 0%, var(--light) 100%); color: var(--bg); padding: 48px 40px; }
+.cover h1 { font-family: 'DM Serif Display', serif; font-size: 2.2rem; margin-bottom: 8px; }
+.cover .subtitle { font-size: 1rem; opacity: 0.85; margin-bottom: 20px; }
+.cover .meta { font-size: 0.82rem; opacity: 0.6; }
+.cover .three-pills { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.cover .pill { background: rgba(239,225,212,0.15); border: 1px solid rgba(239,225,212,0.3); padding: 8px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
+
+.page { padding: 32px 40px; }
+.page + .page { border-top: 2px solid var(--bg); }
+
+h2 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--cognac); }
+h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--cognac); margin: 20px 0 10px; }
+p { margin-bottom: 12px; font-size: 0.9rem; }
+
+.intro-block { background: var(--navy); color: var(--bg); border-radius: 8px; padding: 24px 28px; margin: 24px 0; line-height: 1.7; }
+.intro-block p { color: var(--bg); font-size: 0.92rem; margin-bottom: 0; }
+.intro-block strong { color: #ffd7b5; }
+
+.agenda-card { background: var(--white); border: 2px solid var(--cognac); border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+.agenda-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--cognac); margin: 0 0 14px 0; text-align: center; }
+.agenda-row { display: flex; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+.agenda-row:last-child { border-bottom: none; }
+.agenda-time { font-weight: 700; color: var(--cognac); min-width: 52px; font-size: 0.82rem; }
+.agenda-desc { flex: 1; }
+.agenda-desc strong { color: var(--navy); }
+
+.teach-box { background: #f0f4f8; border-left: 4px solid var(--navy); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 18px 0; }
+.teach-box .teach-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--navy); margin-bottom: 6px; }
+.teach-box p { font-size: 0.85rem; color: var(--light); margin-bottom: 0; line-height: 1.6; }
+
+.big-quote { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--cognac); border-left: 4px solid var(--cognac); padding: 16px 20px; margin: 20px 0; background: #faf6f2; border-radius: 0 8px 8px 0; line-height: 1.5; }
+
+.dish-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+.dish-card { background: #faf6f2; border-radius: 8px; padding: 14px 16px; border: 1px solid var(--border); }
+.dish-card .name { font-weight: 700; color: var(--navy); font-size: 0.9rem; margin-bottom: 4px; }
+.dish-card .talk { font-size: 0.8rem; color: var(--light); line-height: 1.5; }
+.dish-card .talk em { color: var(--cognac); font-style: normal; font-weight: 600; }
+
+.faq-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-item .q { font-weight: 700; color: var(--navy); font-size: 0.88rem; margin-bottom: 4px; }
+.faq-item .a { font-size: 0.85rem; color: var(--light); padding-left: 16px; border-left: 3px solid var(--cognac); }
+
+.script-box { background: var(--navy); color: var(--bg); border-radius: 8px; padding: 16px 20px; margin: 12px 0; }
+.script-box .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.6; margin-bottom: 6px; }
+.script-box p { color: var(--bg); opacity: 0.9; font-size: 0.88rem; margin-bottom: 0; }
+
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 8px 0 8px 32px; position: relative; font-size: 0.88rem; border-bottom: 1px solid #f0ebe5; }
+.checklist li::before { content: '\2610'; position: absolute; left: 0; font-size: 1.1rem; color: var(--cognac); }
+
+.callout { border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.callout.parking { background: #f0f9f0; border: 2px solid var(--green); }
+.callout.parking strong { color: var(--green); }
+.callout.tip { background: #faf6f2; border: 1px solid var(--border); }
+.callout.important { background: #fdf2f2; border: 2px solid #c53030; }
+.callout.important strong { color: #c53030; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.two-col > div { background: #faf6f2; border-radius: 8px; padding: 14px 16px; }
+.two-col h4 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+.two-col ul { padding-left: 16px; font-size: 0.82rem; }
+.two-col li { margin: 4px 0; }
+
+.footer-print { text-align: center; padding: 24px; font-size: 0.75rem; color: var(--light); border-top: 1px solid var(--border); margin-top: 20px; }
+
+@media print {
+  .draft-banner { display: none; }
+  body { max-width: none; }
+  .cover { break-after: page; }
+  .page { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  .teach-box { break-inside: avoid; }
+}
+@media (max-width: 600px) {
+  .cover { padding: 32px 24px; }
+  .cover h1 { font-size: 1.6rem; }
+  .page { padding: 24px; }
+  .dish-grid, .two-col { grid-template-columns: 1fr; }
+  .agenda-card { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="draft-banner">&#9888; Draft Scenario &mdash; Not Yet Adopted by Il Cervo &mdash; For Preview Purposes Only</div>
+
+<!-- COVER -->
+<div class="cover">
+  <h1>Sunday Brunch &mdash; Shift Lead Training Guide</h1>
+  <div class="subtitle">Everything You Need to Run a Killer Pre-Shift</div>
+  <div class="meta">For GM &amp; Shift Leads &middot; Launch Sunday: [DATE] &middot; Pair with: Server Pocket Card</div>
+  <div class="three-pills">
+    <span class="pill">The only Italian brunch in Milwaukee</span>
+    <span class="pill">9th floor panoramic views</span>
+    <span class="pill">Food &amp; Wine Best New Chef</span>
+  </div>
+</div>
+
+<!-- INTRO BLOCK -->
+<div class="page">
+  <div class="intro-block">
+    <p><strong>This guide is YOUR resource</strong> &mdash; not a handout for servers. Read it, absorb it, teach from it. Your servers get a pocket card with the essentials. You bring the stories, the energy, and the depth. Pre-shift is 5&ndash;15 minutes. Here's everything you need to make those minutes count.</p>
+  </div>
+
+  <!-- PRE-SHIFT AGENDA CARD -->
+  <div class="agenda-card">
+    <h3>Pre-Shift Agenda &mdash; 15 Minutes</h3>
+    <div class="agenda-row">
+      <span class="agenda-time">2 min</span>
+      <span class="agenda-desc"><strong>Gather, energy check.</strong> Get everyone in, phones away, quick pulse on the room.</span>
+    </div>
+    <div class="agenda-row">
+      <span class="agenda-time">5 min</span>
+      <span class="agenda-desc"><strong>Today's specials, reservations, any changes.</strong> Cover what's different today &mdash; 86'd items, VIPs, large parties, timing notes.</span>
+    </div>
+    <div class="agenda-row">
+      <span class="agenda-time">5 min</span>
+      <span class="agenda-desc"><strong>Dish spotlight + role-play one FAQ.</strong> Pick 2&ndash;3 dishes, talk through them, then rapid-fire one guest question.</span>
+    </div>
+    <div class="agenda-row">
+      <span class="agenda-time">3 min</span>
+      <span class="agenda-desc"><strong>Hype, praise, go time.</strong> Shout out someone. Remind them why this brunch is special. Send them out sharp.</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 1: WHY THIS MATTERS -->
+<div class="page">
+  <h2>Why This Brunch Is Different</h2>
+
+  <p>This isn't "we added brunch." This is the launch of something nobody else in Milwaukee is doing. We researched every brunch restaurant in the city &mdash; <strong>there is no Italian brunch in Milwaukee.</strong> Not one. We're first.</p>
+
+  <div class="big-quote">
+    "Italian brunch, 9th floor, from a Food &amp; Wine Best New Chef."<br>
+    <span style="font-size:0.8rem; opacity:0.7;">&mdash; That's our position. Nobody else can say it.</span>
+  </div>
+
+  <h3>About Chef Mike</h3>
+  <p>Chef Mike Sheerin is not just a new hire. He is a <strong>2010 Food &amp; Wine Best New Chef</strong> &mdash; one of the most prestigious awards in American dining. He trained at:</p>
+  <ul style="padding-left:20px; margin:8px 0 16px; font-size:0.88rem;">
+    <li><strong>Blackbird</strong> (Chicago) &mdash; Michelin-starred. Mike was Paul Kahan's first-ever chef de cuisine.</li>
+    <li><strong>Jean-Georges</strong> (NYC) &mdash; three Michelin stars</li>
+    <li><strong>WD-50</strong> (NYC) &mdash; Wylie Dufresne's legendary molecular gastronomy restaurant</li>
+    <li><strong>Trenchermen, Embeya, Cicchetti</strong> &mdash; Chicago restaurants he opened and led</li>
+  </ul>
+  <p>When a guest asks about the chef, you have a real story to tell. Not "he's great" &mdash; <strong>"he's a Food &amp; Wine Best New Chef who ran kitchens at Michelin-starred restaurants in New York and Chicago."</strong> That sentence changes how people experience the meal.</p>
+</div>
+
+<!-- PAGE 2: THE DISHES -->
+<div class="page">
+  <h2>The Menu &mdash; Know These Cold</h2>
+  <p>This is Chef Mike's menu &mdash; elevated, chef-driven, Italian DNA throughout (focaccia in everything, giardiniera, Calabrian aioli, San Marzano). When a guest asks "what should I get?" &mdash; lead with the showstoppers.</p>
+
+  <div class="teach-box">
+    <div class="teach-label">How to Teach This</div>
+    <p>Pick 2&ndash;3 dishes per shift to spotlight. Taste them with the team if possible. Don't lecture &mdash; ask "who's tried the gold French toast?" and let them react. Their genuine enthusiasm will sell it better than any script.</p>
+  </div>
+
+  <h3 style="color:var(--cognac); margin-bottom:8px;">The Showstoppers &mdash; Push These</h3>
+  <div class="dish-grid">
+    <div class="dish-card" style="border:2px solid var(--cognac);">
+      <div class="name">24 Carat Gold French Toast &mdash; $22</div>
+      <div class="talk">Banana rum toffee, gold-dusted chopped candied cashews, torched meringue. <em>The talk:</em> "The gold French toast is the move &mdash; banana rum toffee, candied cashews, and it's literally dusted in gold. It's the most photographed dish on the menu." <em>THIS IS YOUR #1 INSTAGRAM ITEM.</em></div>
+    </div>
+    <div class="dish-card" style="border:2px solid var(--cognac);">
+      <div class="name">Black Truffle Omelet &mdash; $22 (add caviar $25)</div>
+      <div class="talk">Whipped herbed ricotta, focaccia, radicchio &amp; escarole salad. <em>The talk:</em> "If you want to treat yourself &mdash; black truffle omelet with whipped ricotta. And if you really want to go for it, add the caviar. Nobody else in Milwaukee is doing caviar at brunch." <em>THE LUXURY ANCHOR &mdash; upsell the caviar for special occasions.</em></div>
+    </div>
+    <div class="dish-card" style="border:2px solid var(--cognac);">
+      <div class="name">Bacon, Egg &amp; Cheese Pizza &mdash; $26 (add truffle $25)</div>
+      <div class="talk">Ricotta, scrambled egg, crispy bacon, scallion. <em>The talk:</em> "Breakfast pizza &mdash; ricotta, egg, bacon, and if you want to go crazy, add the truffle. It's great for sharing." <em>THE TABLE CENTERPIECE &mdash; shareable, fun, drives check average.</em></div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--navy); margin-bottom:8px;">Chef Signatures &mdash; Tell the Story</h3>
+  <div class="dish-grid">
+    <div class="dish-card">
+      <div class="name">Il Cervo's Dry Aged Burger &mdash; $24</div>
+      <div class="talk">White American, giardiniera aioli, grilled onions, crispy bacon, focaccia bun, fries. Add egg $2. <em>The talk:</em> "The burger is dry aged &mdash; Chef Mike ages the beef in-house, which gives it this incredible depth of flavor you won't get anywhere else. The giardiniera aioli is our Italian twist."</div>
+    </div>
+    <div class="dish-card">
+      <div class="name">Dry Aged Meatball Sub &mdash; $24</div>
+      <div class="talk">Dry aged beef meatball, marinara, giardiniera, provolone, focaccia bun, fries. <em>The talk:</em> "House-made meatballs from dry aged beef on fresh focaccia. It's the most Italian thing on the menu and it's unreal."</div>
+    </div>
+    <div class="dish-card">
+      <div class="name">Salmon Gravlax Bruschetta &mdash; $15</div>
+      <div class="talk">Calabrian aioli, pickled onions, cherry tomatoes, avocado, toasted focaccia. <em>The talk:</em> "Think elevated smoked salmon toast &mdash; house-cured gravlax with a spicy Calabrian kick. Great way to start."</div>
+    </div>
+    <div class="dish-card">
+      <div class="name">Steak and Eggs &mdash; $28</div>
+      <div class="talk">Grilled hanger steak, crispy hash browns, two fried eggs, hollandaise. <em>The talk:</em> "Hanger steak is a butcher's cut &mdash; super tender, tons of flavor. With crispy hash browns and hollandaise, it's the power brunch move."</div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--light); margin-bottom:8px;">Fresh Starters</h3>
+  <div class="dish-grid">
+    <div class="dish-card">
+      <div class="name">Caesar Salad &mdash; $14</div>
+      <div class="talk">Baby romaine, preserved garlic dressing. <em>The talk:</em> "Our Caesar uses preserved garlic &mdash; gives it this amazing umami depth that's completely different from a regular Caesar."</div>
+    </div>
+    <div class="dish-card">
+      <div class="name">Slow Roasted Baby Beet Salad &mdash; $19</div>
+      <div class="talk">Red watercress, beauty heart radish, pistachios, sherry maple vinaigrette. <em>The talk:</em> "Beautiful spring salad &mdash; the beauty heart radishes are those gorgeous pink ones. Light, bright, great to share."</div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <strong>Pro tips:</strong><br>
+    &rarr; Every table should hear about the <strong>Gold French Toast</strong> (photo magnet) and the <strong>BEC Pizza</strong> (shareable for groups).<br>
+    &rarr; For special occasions, upsell the <strong>caviar add-on</strong> ($25) on the truffle omelet &mdash; "nobody else in Milwaukee does caviar at brunch."<br>
+    &rarr; Notice: <strong>focaccia is in everything</strong> &mdash; burger bun, meatball sub, bruschetta, omelet side. That's the Italian thread. Mention it: "all our bread is house-made focaccia."<br>
+    &rarr; The <strong>dry aging</strong> is a Chef Mike signature &mdash; two items use it (burger + meatball). It's a talking point: "Chef Mike dry ages the beef in-house."
+  </div>
+</div>
+
+<!-- PAGE 3: THE QUESTIONS -->
+<div class="page">
+  <h2>The Questions You'll Get Asked (and the Answers)</h2>
+
+  <div class="teach-box">
+    <div class="teach-label">How to Teach This</div>
+    <p>Role-play the parking question. Ask a server: "A guest just asked where to park &mdash; go." Make it a quick game, not a quiz. If they fumble, no stress &mdash; just give them the answer and move on. One rep is all it takes.</p>
+  </div>
+
+  <div class="callout parking">
+    <strong>#1 Question: "Where do I park?"</strong><br>
+    <strong style="font-size:1.05rem;">Sunday street parking in Milwaukee is FREE.</strong> No meters. No time limits. Every Sunday. There's street parking on Juneau Ave and surrounding blocks. The hotel also has a garage with a $10 brunch validation. <strong>Lead with free street parking.</strong>
+  </div>
+
+  <div class="faq-item">
+    <div class="q">"Where is the restaurant?"</div>
+    <div class="a">Take the elevator to the 9th floor. Turn right when you exit. We're at the top of the Trade Hotel &mdash; 420 West Juneau, right across from Fiserv Forum. The view is worth the ride up.</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">"Do I need a reservation?"</div>
+    <div class="a">Reservations are recommended and available on OpenTable. We do accept walk-ins based on availability, but Sundays can fill up. Fun fact: most brunch spots in Milwaukee don't take reservations at all &mdash; we do, so you never have to wait in a 60-minute line.</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">"What kind of brunch is this?"</div>
+    <div class="a">It's an Italian brunch &mdash; the only one in Milwaukee. Think bomboloni, eggs in purgatory, mortadella Benedict, and Spritz Towers. We also have classic brunch favorites done with an Italian touch. Chef Mike Sheerin brings a Food &amp; Wine Best New Chef pedigree to everything on the menu.</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">"Is this the same restaurant as dinner?"</div>
+    <div class="a">Same space, same kitchen, same chef &mdash; but a completely different menu designed specifically for brunch. The view is actually better in the morning light.</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">"Who's the chef?"</div>
+    <div class="a">Chef Mike Sheerin &mdash; he was named a Food &amp; Wine Best New Chef in 2010 and cooked at Michelin-starred restaurants in New York and Chicago before coming to Milwaukee. He built this brunch menu from the ground up.</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">"What about the drag brunch?"</div>
+    <div class="a">Drag brunch is still happening once a month &mdash; it's one of our most popular events. This is our new WEEKLY Sunday brunch &mdash; same great food, beautiful space, and the best view in Milwaukee, every single Sunday.</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">"Is there a kids menu?"</div>
+    <div class="a">[Check with Mike &mdash; if yes, mention it. If no:] We don't have a formal kids menu, but we can do simple pasta, a plain pancake, or scrambled eggs for younger guests. Just ask your server and the kitchen will take care of it.</div>
+  </div>
+</div>
+
+<!-- PAGE 4: LAUNCH DAY -->
+<div class="page">
+  <h2>Your Job on Launch Day (and Every Sunday)</h2>
+
+  <h3>The Experience We're Creating</h3>
+  <p>This isn't fast-casual brunch. This is an <strong>occasion</strong>. Guests are on the 9th floor with panoramic views of downtown Milwaukee. They're eating food from an award-winning chef. They're drinking Spritz Towers. This should feel like a special Sunday &mdash; relaxed but elevated. The energy of the room should say: <em>"This is where you want to be on a Sunday morning."</em></p>
+
+  <div class="two-col">
+    <div>
+      <h4 style="color:var(--green);">Do This</h4>
+      <ul>
+        <li>Mention the view &mdash; walk guests to the window if the table isn't next to it</li>
+        <li>Recommend the Gold French Toast or Truffle Omelet to every table</li>
+        <li>Suggest the BEC Pizza for groups of 3+ ("great for sharing")</li>
+        <li>Mention dry aging and house-made focaccia &mdash; these signal serious kitchen</li>
+        <li>If they love it, mention the review card: "We'd love a Google review if you have a sec"</li>
+        <li>Point out the email signup at the host stand on the way out</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:#c53030;">Don't Do This</h4>
+      <ul>
+        <li>Don't just say "it's brunch" &mdash; say "Chef Mike's brunch" or "9th floor brunch"</li>
+        <li>Don't skip the chef story &mdash; Food &amp; Wine Best New Chef is a real differentiator, not bragging</li>
+        <li>Don't let a table leave without hearing about the Gold French Toast, truffle omelet, or caviar add-on</li>
+        <li>Don't say "I think parking is $10" &mdash; say "Sunday street parking is free, and the hotel has a $10 option too"</li>
+        <li>Don't forget: every phone photo a guest takes is free marketing for us</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Three Things to Say to Every Table</h3>
+
+  <div class="teach-box">
+    <div class="teach-label">How to Teach This</div>
+    <p>Don't hand out scripts. Say the line yourself, then ask a server to say it back in their own words. Natural beats memorized every time. If it sounds like them, it'll sound real to the guest.</p>
+  </div>
+
+  <div class="script-box">
+    <div class="label">When They Sit Down</div>
+    <p>"Welcome to Il Cervo &mdash; you're on the 9th floor, best view in Milwaukee for brunch. Have you been up here before? Can I start you with a cocktail, or tell you about a few things Chef Mike is doing that you can't get anywhere else in the city?"</p>
+  </div>
+  <div class="script-box">
+    <div class="label">When They're Ordering</div>
+    <p>"If you're trying us for the first time &mdash; the Gold French Toast is incredible, it's literally dusted in 24 carat gold with torched meringue. And if you want something savory, the dry aged burger or the truffle omelet are Chef Mike signatures. For the table, the Bacon Egg and Cheese Pizza is great for sharing."</p>
+  </div>
+  <div class="script-box">
+    <div class="label">When They're Leaving Happy</div>
+    <p>"So glad you enjoyed it. We're here every Sunday &mdash; and we'd love a quick Google review if you have a second. It really helps people find us up here on the 9th floor."</p>
+  </div>
+</div>
+
+<!-- PAGE 5: QUICK REFERENCE -->
+<div class="page">
+  <h2>Quick Reference Card</h2>
+
+  <div class="two-col">
+    <div style="background:var(--navy); color:var(--bg); border-radius:8px;">
+      <h4 style="color:#ffd7b5;">The Three Differentiators</h4>
+      <ul style="list-style:none; padding:0;">
+        <li style="padding:4px 0; font-size:0.88rem; border-bottom:1px solid rgba(239,225,212,0.15);"><strong>Only Italian brunch in Milwaukee</strong></li>
+        <li style="padding:4px 0; font-size:0.88rem; border-bottom:1px solid rgba(239,225,212,0.15);"><strong>9th floor &mdash; highest brunch view in the city</strong></li>
+        <li style="padding:4px 0; font-size:0.88rem;"><strong>Food &amp; Wine Best New Chef 2010</strong></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--cognac);">Need to Know</h4>
+      <ul style="list-style:none; padding:0; font-size:0.85rem;">
+        <li style="padding:4px 0;">420 W Juneau Ave, 9th Floor</li>
+        <li style="padding:4px 0;">Free Sunday street parking</li>
+        <li style="padding:4px 0;">$10 hotel garage validation</li>
+        <li style="padding:4px 0;">Reservations on OpenTable</li>
+        <li style="padding:4px 0;">[Brunch hours &mdash; TBD]</li>
+        <li style="padding:4px 0;">Chef Mike Sheerin</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Launch Day Checklist</h3>
+
+  <div class="teach-box">
+    <div class="teach-label">How to Teach This</div>
+    <p>Run through this at the END of pre-shift. It should feel like a confidence check, not a test. Read each line, let them nod or ask a question. If someone looks unsure on one, give them the answer right there. Send them out feeling ready, not quizzed.</p>
+  </div>
+
+  <ul class="checklist">
+    <li>I know the three differentiators and can say them naturally</li>
+    <li>I can describe the Gold French Toast, Truffle Omelet, and BEC Pizza with enthusiasm</li>
+    <li>I know the parking answer (free Sunday street parking + $10 garage)</li>
+    <li>I know Chef Mike's background (Food &amp; Wine, Blackbird, Jean-Georges)</li>
+    <li>I have review cards ready to place in check presenters</li>
+    <li>I know where the email signup is at the host stand</li>
+    <li>I've walked to the windows and seen the view (so I can point it out to guests)</li>
+    <li>I know the Gold French Toast is the photo magnet and the BEC Pizza is the group sell</li>
+  </ul>
+
+  <div class="callout important">
+    <strong>The #1 thing to remember:</strong> Every guest who leaves and tells one friend "we went to this Italian brunch on the 9th floor of the Trade Hotel &mdash; the view was insane and the food was incredible" is worth more than any ad we could run. You ARE the marketing on launch day. The food gets them in the door. You make them come back.
+  </div>
+</div>
+
+<div class="footer-print">
+  Il Cervo &middot; Sunday Brunch &mdash; Shift Lead Training Guide &middot; DRAFT SCENARIO &mdash; Not Yet Adopted<br>
+  Print this: File &rarr; Print &rarr; Save as PDF, or Cmd+P
+</div>
+
+</body>
+</html>
